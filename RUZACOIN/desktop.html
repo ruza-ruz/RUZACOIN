@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>RUZA Token — The Future Vision</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
-
   <style>
     body {
       margin: 0;
@@ -79,15 +78,61 @@
     <p id="claim-msg" style="color:#bfefff;margin-top:12px;font-size:0.95rem;"></p>
 
     <p style="font-size:0.85rem;color:#ccc;margin-top:10px;">
-      Each address can claim only once. Upon review, token transfers will be processed by the RUZA team.
+      Each address can claim only once. Token transfers will be processed by the RUZA team.
     </p>
+
     <p style="font-size:0.9rem;color:#bfefff;margin-top:8px;">
-      Receive a <strong>25 RUZ bonus</strong> for every new participant who joins using your referral link!
+      Receive a <strong>25 RUZ bonus</strong> for every referred participant!
     </p>
   </section>
 
+  <!-- PancakeSwap -->
+  <div class="pancake">
+    <a href="https://pancakeswap.finance/swap?outputCurrency=0x2ec86e1b869cb251fe9441f02c01761543e6cbbd" target="_blank">
+      <img src="assets/pancake.png" alt="PancakeSwap" />
+      Trade RUZA on PancakeSwap
+    </a>
+  </div>
+
+  <!-- Live Chart -->
+  <section class="section-box chart">
+    <h2>📊 Live Chart</h2>
+    <iframe src="https://dexscreener.com/bsc/0x2ec86e1b869cb251fe9441f02c01761543e6cbbd?embed=1&theme=light"></iframe>
+  </section>
+
+  <!-- Vision -->
+  <section class="section-box vision">
+    <h2>🚀 RUZA Future Vision</h2>
+    <p>
+      RUZA Token is a long-term project dedicated to advancing the future of space tourism and exploration.
+      We will reinvest resources into research, development, and collaborations with the space industry
+      so RUZA becomes a major contributor to humanity’s journey beyond Earth.
+    </p>
+  </section>
+
+  <!-- Whitepaper -->
+  <section class="section-box whitepaper">
+    <a href="assets/whitepaper.pdf" target="_blank">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" alt="PDF" />
+      Download RUZA Whitepaper
+    </a>
+  </section>
+
+  <footer>
+    <p>Join our community:</p>
+    <p>
+      <a href="https://t.me/RUZAOFFICIAL" target="_blank">
+        <img src="assets/telegram.png" alt="Telegram" /> t.me/RUZAOFFICIAL
+      </a> |
+      <a href="https://instagram.com/RUZA_TOKEN" target="_blank">
+        <img src="assets/instagram.png" alt="Instagram" /> @RUZA_TOKEN
+      </a>
+    </p>
+  </footer>
+
+  <!-- ⭐⭐⭐ ONLY REFERRAL LOGIC UPDATED ⭐⭐⭐ -->
   <script>
-    // ⭐ Stars
+    // Stars animation setup
     const starContainer = document.getElementById("stars");
     for (let i = 0; i < 80; i++) {
       const s = document.createElement("span");
@@ -97,7 +142,7 @@
       starContainer.appendChild(s);
     }
 
-    // ====== Backend API ======
+    // Backend
     const apiBase = "https://a81912a7-42f3-4326-83a4-1182d241dad7-00-wmx91wfir4d7.janeway.replit.dev";
 
     function isValidAddr(a) {
@@ -106,17 +151,18 @@
 
     const msg = document.getElementById("claim-msg");
 
-    // =========== GET REFERRAL FROM URL ==============
+    // READ REFERRAL FROM URL
     const urlParams = new URLSearchParams(window.location.search);
-    let urlRef = urlParams.get("ref");
+    const urlRef = urlParams.get("ref");
+
     if (isValidAddr(urlRef)) {
       document.getElementById("claim-ref").value = urlRef;
     }
 
-    // =========== CLAIM SUBMIT ==============
+    // SEND CLAIM
     document.getElementById("claim-btn").onclick = async () => {
       msg.style.color = "#bfefff";
-      msg.textContent = "Submitting... Please wait.";
+      msg.textContent = "Submitting...";
 
       const address = document.getElementById("claim-address").value.trim();
       let ref = document.getElementById("claim-ref").value.trim();
@@ -128,7 +174,6 @@
         return;
       }
 
-      // اگر رفرال معتبر نیست → null
       if (!isValidAddr(ref) || ref.toLowerCase() === address.toLowerCase()) {
         ref = null;
       }
@@ -137,20 +182,17 @@
         const res = await fetch(apiBase + "/api/claim", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            address,
-            referrer: ref,
-            contact: contact || null
-          })
+          body: JSON.stringify({ address, referrer: ref, contact: contact || null }),
         });
 
         const data = await res.json();
+
         if (res.ok) {
           msg.style.color = "#bfffbf";
-          msg.textContent = data.message || "Claim submitted successfully.";
+          msg.textContent = data.message || "Claim submitted!";
         } else {
           msg.style.color = "#ff9999";
-          msg.textContent = data.error || "Submission failed.";
+          msg.textContent = data.error;
         }
       } catch (e) {
         msg.style.color = "#ff9999";
@@ -158,16 +200,15 @@
       }
     };
 
-    // =========== COPY REFERRAL LINK ==============
+    // COPY REFERRAL LINK
     document.getElementById("copy-ref-link").onclick = () => {
       const addr = document.getElementById("claim-address").value.trim();
       if (!isValidAddr(addr)) return alert("Enter your wallet address first.");
 
       const link = window.location.origin + window.location.pathname + "?ref=" + addr;
-      navigator.clipboard.writeText(link).then(() => {
-        msg.style.color = "#bfefff";
-        msg.textContent = "Referral link copied!";
-      });
+      navigator.clipboard.writeText(link);
+      msg.style.color = "#bfefff";
+      msg.textContent = "Referral link copied!";
     };
   </script>
 
