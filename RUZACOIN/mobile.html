@@ -82,9 +82,8 @@
 
     <h2 class="highlight-title">1,000,000 RUZA Tokens Will Be Distributed for Free!</h2>
 
-    <p class="distribution-info">
-      <strong>📊 420</strong> out of <strong>1,000,000</strong> RUZA tokens have been distributed so far.
-    </p>
+    <!-- LIVE STATS FIXED -->
+    <p class="distribution-info" id="claim-stats">Loading...</p>
 
     <section class="section-box claim-section">
       <h2>🎁 Claim 100 RUZ — One Time per Wallet</h2>
@@ -146,6 +145,95 @@
     </footer>
   </div>
 
-  <!-- FIXED REFERRAL LOGIC -->
+  <!-- REFERRAL + LIVE STATS + CLAIM SYSTEM -->
   <script>
-    const apiBase = "https://a
+    const apiBase = "https://a81912a7-42f3-4326-83a4-1182d241dad7-00-wmx91wfir4d7.janeway.replit.dev";
+
+    function isValidAddr(a) {
+      return typeof a === "string" && /^0x[a-fA-F0-9]{40}$/.test(a.trim());
+    }
+
+    const msg = document.getElementById("claim-msg");
+
+    // LOAD LIVE STATS
+    async function loadStats() {
+      const box = document.getElementById("claim-stats");
+
+      try {
+        const res = await fetch(apiBase + "/api/stats");
+        const data = await res.json();
+
+        if (res.ok && data.totalClaimed !== undefined) {
+          box.innerHTML = `<strong>${data.totalClaimed}</strong> out of <strong>1,000,000</strong> RUZA tokens have been distributed so far.`;
+        } else {
+          box.textContent = "Unable to load statistics.";
+        }
+      } catch (e) {
+        box.textContent = "Unable to load statistics.";
+      }
+    }
+    loadStats();
+
+    // READ REFERRAL FROM URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const urlRef = urlParams.get("ref");
+    if (isValidAddr(urlRef)) {
+      document.getElementById("claim-ref").value = urlRef;
+    }
+
+    // SEND CLAIM
+    document.getElementById("claim-btn").onclick = async () => {
+      msg.style.color = "#bfefff";
+      msg.textContent = "Submitting...";
+
+      const address = document.getElementById("claim-address").value.trim();
+      let ref = document.getElementById("claim-ref").value.trim();
+      const contact = document.getElementById("claim-contact").value.trim();
+
+      if (!isValidAddr(address)) {
+        msg.style.color = "#ff9999";
+        msg.textContent = "Invalid wallet address.";
+        return;
+      }
+
+      if (!isValidAddr(ref) || ref.toLowerCase() === address.toLowerCase()) {
+        ref = null;
+      }
+
+      try {
+        const res = await fetch(apiBase + "/api/claim", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ address, referrer: ref, contact: contact || null }),
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+          msg.style.color = "#bfffbf";
+          msg.textContent = data.message || "Claim submitted!";
+          loadStats();
+        } else {
+          msg.style.color = "#ff9999";
+          msg.textContent = data.error;
+        }
+      } catch (e) {
+        msg.style.color = "#ff9999";
+        msg.textContent = "Server connection error.";
+      }
+    };
+
+    // REFERRAL LINK COPY
+    document.getElementById("copy-ref-link").onclick = () => {
+      const addr = document.getElementById("claim-address").value.trim();
+      if (!isValidAddr(addr)) return alert("Enter your wallet address first.");
+
+      const link = window.location.origin + window.location.pathname + "?ref=" + addr;
+      navigator.clipboard.writeText(link);
+      msg.textContent = "Referral link copied!";
+      msg.style.color = "#bfefff";
+    };
+  </script>
+
+</body>
+</html>
