@@ -69,8 +69,10 @@
     @media (max-width: 360px) { h1 { font-size: 1.4rem; } .highlight-title { font-size: 1.1rem; } }
   </style>
 </head>
+
 <body>
   <div class="container">
+
     <header>
       <img src="assets/logo.png" alt="RUZA Logo" />
       <h1>RUZA Token</h1>
@@ -79,19 +81,27 @@
     </header>
 
     <h2 class="highlight-title">1,000,000 RUZA Tokens Will Be Distributed for Free!</h2>
-    <p class="distribution-info"><strong>📊 420</strong> out of <strong>1,000,000</strong> RUZA tokens have been distributed so far.</p>
+
+    <p class="distribution-info">
+      <strong>📊 420</strong> out of <strong>1,000,000</strong> RUZA tokens have been distributed so far.
+    </p>
 
     <section class="section-box claim-section">
       <h2>🎁 Claim 100 RUZ — One Time per Wallet</h2>
+
       <input id="claim-address" type="text" placeholder="Your BNB Smart Chain Wallet (0x...)" />
       <input id="claim-ref" type="text" placeholder="Referral Address (Optional)" />
       <input id="claim-contact" type="text" placeholder="Email or Telegram (Optional)" />
+
       <button id="claim-btn">Submit Claim</button>
       <button id="copy-ref-link">Copy My Referral Link</button>
+
       <p id="claim-msg" style="color:#bfefff;margin-top:12px;font-size:0.9rem;"></p>
+
       <p style="font-size:0.85rem;color:#ccc;margin-top:10px;">
         Each address can claim only once. Upon review, token transfers will be processed by the RUZA team.
       </p>
+
       <p style="font-size:0.9rem;color:#bfefff;margin-top:8px;">
         Receive a <strong>25 RUZ bonus</strong> for every new participant who joins using your referral link!
       </p>
@@ -136,59 +146,6 @@
     </footer>
   </div>
 
+  <!-- FIXED REFERRAL LOGIC -->
   <script>
-    const apiBase = "https://a81912a7-42f3-4326-83a4-1182d241dad7-00-wmx91wfir4d7.janeway.replit.dev";
-
-    function isValidAddr(a){ return typeof a==='string' && /^0x[a-fA-F0-9]{40}$/.test(a.trim()); }
-
-    const urlParams = new URLSearchParams(window.location.search);
-    const ref = urlParams.get('ref');
-    if (ref) document.getElementById('claim-ref').value = ref;
-
-    const msg = document.getElementById('claim-msg');
-
-    document.getElementById('claim-btn').onclick = async () => {
-      msg.style.color='#bfefff';
-      msg.textContent='Submitting... Please wait.';
-      const address=document.getElementById('claim-address').value.trim();
-      const ref=document.getElementById('claim-ref').value.trim();
-      const contact=document.getElementById('claim-contact').value.trim();
-
-      if(!isValidAddr(address)){
-        msg.style.color='#ff9999';
-        msg.textContent='Invalid wallet address.';
-        return;
-      }
-
-      try {
-        const res = await fetch(apiBase + "/api/claim", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ address, referrer: ref || null, contact: contact || null }),
-        });
-        const data = await res.json();
-        if(res.ok){
-          msg.style.color='#bfffbf';
-          msg.textContent=data.message || "Claim submitted successfully.";
-        } else {
-          msg.style.color='#ff9999';
-          msg.textContent=data.error || "Submission failed.";
-        }
-      } catch(e) {
-        msg.style.color='#ff9999';
-        msg.textContent="Server connection error.";
-      }
-    };
-
-    document.getElementById('copy-ref-link').onclick = () => {
-      const myAddr=document.getElementById('claim-address').value.trim();
-      if(!isValidAddr(myAddr)){alert('Enter your wallet address first.');return;}
-      const link=window.location.origin+window.location.pathname+'?ref='+myAddr;
-      navigator.clipboard.writeText(link).then(()=>{
-        msg.style.color='#bfefff';
-        msg.textContent='Referral link copied to clipboard.';
-      });
-    };
-  </script>
-</body>
-</html>
+    const apiBase = "https://a
