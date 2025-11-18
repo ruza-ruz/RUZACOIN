@@ -63,7 +63,9 @@
   </header>
 
   <h2 class="highlight-title">1,000,000 RUZA Tokens Will Be Distributed for Free!</h2>
-  <p class="distribution-info">420 out of 1,000,000 RUZA tokens have been claimed so far.</p>
+
+  <!-- THIS PART UPDATED TO LIVE DATA -->
+  <p class="distribution-info" id="claim-stats">Loading...</p>
 
   <section class="section-box claim-section">
     <h2>🎁 Claim 100 RUZ — One Time per Wallet</h2>
@@ -100,7 +102,7 @@
     <iframe src="https://dexscreener.com/bsc/0x2ec86e1b869cb251fe9441f02c01761543e6cbbd?embed=1&theme=light"></iframe>
   </section>
 
-  <!-- Vision -->
+  <!-- Vision Section -->
   <section class="section-box vision">
     <h2>🚀 RUZA Future Vision</h2>
     <p>
@@ -130,7 +132,7 @@
     </p>
   </footer>
 
-  <!-- ⭐⭐⭐ ONLY REFERRAL LOGIC UPDATED ⭐⭐⭐ -->
+  <!-- FULL JAVASCRIPT WITH REFERRAL + LIVE STATS -->
   <script>
     // Stars animation setup
     const starContainer = document.getElementById("stars");
@@ -142,7 +144,6 @@
       starContainer.appendChild(s);
     }
 
-    // Backend
     const apiBase = "https://a81912a7-42f3-4326-83a4-1182d241dad7-00-wmx91wfir4d7.janeway.replit.dev";
 
     function isValidAddr(a) {
@@ -151,10 +152,27 @@
 
     const msg = document.getElementById("claim-msg");
 
-    // READ REFERRAL FROM URL
+    // READ LIVE STATS
+    async function loadStats() {
+      const box = document.getElementById("claim-stats");
+      try {
+        const res = await fetch(apiBase + "/api/stats");
+        const data = await res.json();
+
+        if (res.ok && data.totalClaimed !== undefined) {
+          box.textContent = `${data.totalClaimed} out of 1,000,000 RUZA tokens have been claimed so far.`;
+        } else {
+          box.textContent = "Unable to load statistics.";
+        }
+      } catch (e) {
+        box.textContent = "Unable to load statistics.";
+      }
+    }
+    loadStats();
+
+    // URL REFERRAL
     const urlParams = new URLSearchParams(window.location.search);
     const urlRef = urlParams.get("ref");
-
     if (isValidAddr(urlRef)) {
       document.getElementById("claim-ref").value = urlRef;
     }
@@ -190,6 +208,7 @@
         if (res.ok) {
           msg.style.color = "#bfffbf";
           msg.textContent = data.message || "Claim submitted!";
+          loadStats(); // update live stats immediately
         } else {
           msg.style.color = "#ff9999";
           msg.textContent = data.error;
