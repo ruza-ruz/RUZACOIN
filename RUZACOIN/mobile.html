@@ -1,239 +1,257 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-  <title>RUZA Token — Mobile</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
+<meta charset="UTF-8" />
+<title>RUZA Token — Mobile</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <style>
-    html, body { max-width: 100%; overflow-x: hidden; margin: 0; padding: 0; }
-    body {
-      font-family: "Poppins", Arial, sans-serif;
-      color: #fff;
-      text-align: center;
-      background: linear-gradient(180deg, #020010 0%, #0a0433 70%, #000 100%);
-    }
-    .container { max-width: 480px; margin: 0 auto; padding: 0 12px; box-sizing: border-box; }
-    header { padding: 30px 10px; position: relative; z-index: 2; }
-    header img { width: 100px; display: block; margin: 0 auto; }
-    h1 { margin: 10px 0; font-size: 1.6rem; }
-    .slogan { font-size: 0.9rem; color: #ccc; margin-bottom: 10px; }
-    .tagline { font-size: 0.95rem; color: #ffd966; font-style: italic; margin-bottom: 25px; }
-    .section-box {
-      background: rgba(255,255,255,0.05); border-radius: 15px; padding: 20px; margin: 15px auto;
-      width: 100%; box-shadow: 0 0 12px rgba(255,255,255,0.07); box-sizing: border-box;
-    }
-    .highlight-title { font-size: 1.3rem; color: #00ffff; margin-bottom: 10px; font-weight: 600; text-shadow: 0 0 10px rgba(0,255,255,0.4); }
-    .distribution-info { font-size: 1rem; color: #bfefff; margin-bottom: 20px; }
-    input {
-      width: 100%; padding: 10px; margin: 6px 0; border-radius: 8px; border: none;
-      font-size: 1rem; box-sizing: border-box;
-    }
-    button {
-      background: #009dff; color: white; border: none; padding: 10px 16px;
-      font-size: 1rem; border-radius: 8px; cursor: pointer; transition: 0.3s;
-      margin-top: 6px; width: 100%; max-width: 280px;
-    }
-    button:hover { background: #0078cc; }
-    .pancake { margin-top: 15px; }
-    .pancake a {
-      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
-      background: #ffcc00; color: #111; font-weight: 600;
-      padding: 10px 14px; border-radius: 10px; text-decoration: none;
-      transition: transform 0.3s; max-width: 100%; box-sizing: border-box;
-    }
-    .pancake a:hover { transform: scale(1.05); background: #ffe066; }
-    .pancake img { width: 24px; height: 24px; }
-    iframe { width: 100%; max-width: 100%; height: 350px; border: none; border-radius: 10px; box-sizing: border-box; }
-    .vision h2 { color: #ffcc00; font-size: 1.3rem; margin-bottom: 15px; }
-    .vision p { line-height: 1.6; color: #ddd; font-size: 0.95rem; }
-    .whitepaper a {
-      text-decoration: none; color: #ff5555; font-weight: 600;
-      display: inline-flex; align-items: center; gap: 8px;
-      transition: transform 0.3s;
-    }
-    .whitepaper a:hover { transform: scale(1.05); color: #ff8888; }
-    .whitepaper img { width: 22px; height: 22px; }
-    footer {
-      background: #10162d; padding: 20px; margin-top: 30px;
-      border-top: 1px solid rgba(255,255,255,0.1); position: relative; z-index: 2;
-    }
-    footer a {
-      color: #00bfff; text-decoration: none; margin: 0 8px;
-      display: inline-flex; align-items: center; gap: 6px;
-      transition: color 0.3s, transform 0.3s; font-size: 0.9rem;
-    }
-    footer a:hover { color: #66d9ff; transform: scale(1.1); }
-    footer img { width: 20px; height: 20px; vertical-align: middle; }
-    @media (max-width: 360px) { h1 { font-size: 1.4rem; } .highlight-title { font-size: 1.1rem; } }
-  </style>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: #020010;
+    color: #fff;
+  }
+
+  header {
+    text-align: center;
+    padding: 25px 12px;
+  }
+
+  header img {
+    width: 120px;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+    margin-top: 10px;
+  }
+
+  .slogan {
+    font-size: 0.9rem;
+    color: #ccc;
+    margin-top: 6px;
+  }
+
+  .tagline {
+    font-size: 0.95rem;
+    color: #ffd966;
+    margin-top: 4px;
+  }
+
+  .container {
+    padding: 15px;
+  }
+
+  .section-box {
+    background: rgba(255,255,255,0.07);
+    padding: 18px;
+    border-radius: 12px;
+    margin-bottom: 18px;
+  }
+
+  .title {
+    text-align: center;
+    font-size: 1.3rem;
+    color: #00eaff;
+    font-weight: bold;
+  }
+
+  .distribution-info {
+    text-align: center;
+    font-size: 1rem;
+    color: #bfefff;
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+
+  input {
+    padding: 10px;
+    width: 100%;
+    margin-top: 8px;
+    border-radius: 8px;
+    border: none;
+    font-size: 0.95rem;
+  }
+
+  button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 12px;
+    background: #009dff;
+    color: #fff;
+    font-size: 1rem;
+    border: none;
+    border-radius: 10px;
+  }
+
+  button:active {
+    background: #007acc;
+  }
+
+  .pancake {
+    text-align: center;
+    margin: 20px 0;
+  }
+
+  .pancake a {
+    display: inline-flex;
+    align-items: center;
+    background: #ffcc00;
+    padding: 12px 20px;
+    border-radius: 10px;
+    color: #000;
+    text-decoration: none;
+    font-weight: bold;
+    gap: 8px;
+  }
+
+  iframe {
+    width: 100%;
+    height: 420px;
+    border-radius: 10px;
+    border: none;
+  }
+
+  footer {
+    background: #0b1028;
+    text-align: center;
+    padding: 25px 15px;
+    margin-top: 30px;
+  }
+
+  footer a {
+    text-decoration: none;
+    color: #00bfff;
+    margin: 0 10px;
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.95rem;
+    gap: 6px;
+  }
+
+  footer img {
+    width: 22px;
+  }
+</style>
 </head>
 
 <body>
-  <div class="container">
 
-    <header>
-      <img src="assets/logo.png" alt="RUZA Logo" />
-      <h1>RUZA Token</h1>
-      <div class="slogan">The Future of Space Tourism Economy — Powered by Blockchain</div>
-      <div class="tagline">Innovating for the next era of space exploration.</div>
-    </header>
+<header>
+  <img src="assets/logo.png" />
+  <h1>RUZA Token</h1>
 
-    <h2 class="highlight-title">1,000,000 RUZA Tokens Will Be Distributed for Free!</h2>
+  <div class="slogan">The Future of Space Tourism Economy</div>
+  <div class="tagline">Powered by Blockchain — Next Era Economy</div>
+</header>
 
-    <!-- LIVE STATS FIXED -->
-    <p class="distribution-info" id="claim-stats">Loading...</p>
+<div class="container">
 
-    <section class="section-box claim-section">
-      <h2>🎁 Claim 100 RUZ — One Time per Wallet</h2>
+  <div class="title">1,000,000 RUZA Tokens Free Distribution</div>
 
-      <input id="claim-address" type="text" placeholder="Your BNB Smart Chain Wallet (0x...)" />
-      <input id="claim-ref" type="text" placeholder="Referral Address (Optional)" />
-      <input id="claim-contact" type="text" placeholder="Email or Telegram (Optional)" />
-
-      <button id="claim-btn">Submit Claim</button>
-      <button id="copy-ref-link">Copy My Referral Link</button>
-
-      <p id="claim-msg" style="color:#bfefff;margin-top:12px;font-size:0.9rem;"></p>
-
-      <p style="font-size:0.85rem;color:#ccc;margin-top:10px;">
-        Each address can claim only once. Upon review, token transfers will be processed by the RUZA team.
-      </p>
-
-      <p style="font-size:0.9rem;color:#bfefff;margin-top:8px;">
-        Receive a <strong>25 RUZ bonus</strong> for every new participant who joins using your referral link!
-      </p>
-    </section>
-
-    <div class="pancake">
-      <a href="https://pancakeswap.finance/swap?outputCurrency=0x2ec86e1b869cb251fe9441f02c01761543e6cbbd" target="_blank">
-        <img src="assets/pancake.png" alt="PancakeSwap" /> Trade RUZA (RUZ) on PancakeSwap
-      </a>
-    </div>
-
-    <section class="section-box chart">
-      <h2>📊 Live Chart</h2>
-      <iframe src="https://dexscreener.com/bsc/0x2ec86e1b869cb251fe9441f02c01761543e6cbbd?embed=1&theme=light"></iframe>
-    </section>
-
-    <section class="section-box vision">
-      <h2>🚀 RUZA Future Vision</h2>
-      <p>
-        RUZA Token is dedicated to driving innovation in the blockchain-powered space tourism industry.
-        Our mission is to connect future travelers, investors, and developers in a decentralized space economy.
-      </p>
-    </section>
-
-    <section class="section-box whitepaper">
-      <a href="assets/whitepaper.pdf" target="_blank">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" alt="PDF" />
-        Download RUZA Whitepaper
-      </a>
-    </section>
-
-    <footer>
-      <p>Join our community:</p>
-      <p>
-        <a href="https://t.me/RUZAOFFICIAL" target="_blank">
-          <img src="assets/telegram.png" alt="Telegram" /> t.me/RUZAOFFICIAL
-        </a> |
-        <a href="https://instagram.com/RUZA_TOKEN" target="_blank">
-          <img src="assets/instagram.png" alt="Instagram" /> @RUZA_TOKEN
-        </a>
-      </p>
-    </footer>
+  <div class="distribution-info">
+    <strong id="totalDist">…</strong> / 1,000,000 Distributed
   </div>
 
-  <!-- REFERRAL + LIVE STATS + CLAIM SYSTEM -->
-  <script>
-    const apiBase = "https://a81912a7-42f3-4326-83a4-1182d241dad7-00-wmx91wfir4d7.janeway.replit.dev";
+  <div class="section-box">
+    <h2 style="font-size:1.2rem;text-align:center;">🎁 Claim 100 RUZ</h2>
 
-    function isValidAddr(a) {
-      return typeof a === "string" && /^0x[a-fA-F0-9]{40}$/.test(a.trim());
+    <input id="claim-address" type="text" placeholder="Your Wallet (0x...)" />
+    <input id="claim-ref" type="text" placeholder="Referral Wallet (Optional)" />
+    <input id="claim-contact" type="text" placeholder="Telegram or Email (Optional)" />
+
+    <button id="claim-btn">Submit Claim</button>
+    <button id="copy-ref-link">Copy My Referral Link</button>
+
+    <p id="claim-msg" style="text-align:center;margin-top:10px;color:#bfefff;font-size:0.9rem;"></p>
+  </div>
+
+  <div class="pancake">
+    <a href="https://pancakeswap.finance/swap?outputCurrency=0x2ec86e1b869cb251fe9441f02c01761543e6cbbd" target="_blank">
+      <img src="assets/pancake.png" width="26" /> PancakeSwap Trade
+    </a>
+  </div>
+
+  <div class="section-box">
+    <h2 style="font-size:1.2rem;text-align:center;">📊 Live Chart</h2>
+    <iframe src="https://dexscreener.com/bsc/0x2ec86e1b869cb251fe9441f02c01761543e6cbbd?embed=1&theme=light"></iframe>
+  </div>
+
+  <div class="section-box">
+    <h2 style="font-size:1.2rem;text-align:center;">🚀 RUZA Vision</h2>
+    <p style="font-size:0.9rem;line-height:1.5;">
+      RUZA Token is building the first decentralized space tourism economy,
+      enabling a new era of blockchain-powered innovation beyond Earth.
+    </p>
+  </div>
+
+  <div class="section-box" style="text-align:center;">
+    <a href="assets/whitepaper.pdf" target="_blank" style="text-decoration:none;color:#ff7777;font-weight:bold;">
+      Download Whitepaper (PDF)
+    </a>
+  </div>
+
+</div>
+
+<footer>
+  <p style="font-size:1rem;margin-bottom:12px;">Join RUZA Community</p>
+
+  <a href="https://t.me/RUZAOFFICIAL" target="_blank">
+    <img src="assets/telegram.png" /> Telegram
+  </a>
+
+  <a href="https://instagram.com/RUZA_TOKEN" target="_blank">
+    <img src="assets/instagram.png" /> Instagram
+  </a>
+</footer>
+
+<script>
+  const API = "https://YOUR_BACKEND_URL"; // Example: https://ruza-backend.replit.app
+
+  // Load total distributed
+  async function loadTotal() {
+    try {
+      const r = await fetch(API + "/admin/total", { credentials: "include" });
+      const d = await r.json();
+      document.getElementById("totalDist").innerText = d.total ?? 420;
+    } catch {
+      document.getElementById("totalDist").innerText = "420";
+    }
+  }
+  loadTotal();
+
+  // Claim
+  document.getElementById("claim-btn").onclick = async () => {
+    const address = document.getElementById("claim-address").value.trim();
+    const ref = document.getElementById("claim-ref").value.trim();
+    const contact = document.getElementById("claim-contact").value.trim();
+
+    const r = await fetch(API + "/api/claim", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ address, referrer: ref, contact })
+    });
+
+    const d = await r.json();
+    document.getElementById("claim-msg").innerText =
+      d.success ? "Your claim is submitted." : d.error;
+  };
+
+  // Copy referral link
+  document.getElementById("copy-ref-link").onclick = () => {
+    const address = document.getElementById("claim-address").value.trim();
+    if (!address) {
+      alert("Enter your wallet first");
+      return;
     }
 
-    const msg = document.getElementById("claim-msg");
-
-    // LOAD LIVE STATS
-    async function loadStats() {
-      const box = document.getElementById("claim-stats");
-
-      try {
-        const res = await fetch(apiBase + "/api/stats");
-        const data = await res.json();
-
-        if (res.ok && data.totalClaimed !== undefined) {
-          box.innerHTML = `<strong>${data.totalClaimed}</strong> out of <strong>1,000,000</strong> RUZA tokens have been distributed so far.`;
-        } else {
-          box.textContent = "Unable to load statistics.";
-        }
-      } catch (e) {
-        box.textContent = "Unable to load statistics.";
-      }
-    }
-    loadStats();
-
-    // READ REFERRAL FROM URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const urlRef = urlParams.get("ref");
-    if (isValidAddr(urlRef)) {
-      document.getElementById("claim-ref").value = urlRef;
-    }
-
-    // SEND CLAIM
-    document.getElementById("claim-btn").onclick = async () => {
-      msg.style.color = "#bfefff";
-      msg.textContent = "Submitting...";
-
-      const address = document.getElementById("claim-address").value.trim();
-      let ref = document.getElementById("claim-ref").value.trim();
-      const contact = document.getElementById("claim-contact").value.trim();
-
-      if (!isValidAddr(address)) {
-        msg.style.color = "#ff9999";
-        msg.textContent = "Invalid wallet address.";
-        return;
-      }
-
-      if (!isValidAddr(ref) || ref.toLowerCase() === address.toLowerCase()) {
-        ref = null;
-      }
-
-      try {
-        const res = await fetch(apiBase + "/api/claim", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ address, referrer: ref, contact: contact || null }),
-        });
-
-        const data = await res.json();
-
-        if (res.ok) {
-          msg.style.color = "#bfffbf";
-          msg.textContent = data.message || "Claim submitted!";
-          loadStats();
-        } else {
-          msg.style.color = "#ff9999";
-          msg.textContent = data.error;
-        }
-      } catch (e) {
-        msg.style.color = "#ff9999";
-        msg.textContent = "Server connection error.";
-      }
-    };
-
-    // REFERRAL LINK COPY
-    document.getElementById("copy-ref-link").onclick = () => {
-      const addr = document.getElementById("claim-address").value.trim();
-      if (!isValidAddr(addr)) return alert("Enter your wallet address first.");
-
-      const link = window.location.origin + window.location.pathname + "?ref=" + addr;
-      navigator.clipboard.writeText(link);
-      msg.textContent = "Referral link copied!";
-      msg.style.color = "#bfefff";
-    };
-  </script>
+    const link = window.location.origin + "/?ref=" + address;
+    navigator.clipboard.writeText(link);
+    alert("Referral link copied");
+  };
+</script>
 
 </body>
 </html>
