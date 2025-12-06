@@ -38,7 +38,7 @@
     .slogan{font-size:1rem;color:#ccc;margin-bottom:6px}
     .tagline{font-size:1rem;color:var(--highlight);font-style:italic;margin-bottom:18px}
 
-    /* LIVE PRICE BOX — NEW STYLE */
+ /* LIVE PRICE BOX — NEW STYLE */
 .live-row{
   display:flex;
   justify-content:center;
@@ -59,6 +59,7 @@
   font-weight:600;
   color:var(--muted);
   backdrop-filter:blur(5px);
+  text-align:center;
 }
 
 .price-card strong{
@@ -72,9 +73,50 @@
   color:#fff;
 }
 
-    .section-box{background:var(--card-bg);border-radius:15px;padding:22px;margin:22px auto;width:90%;max-width:1000px;box-shadow:0 0 12px rgba(255,255,255,0.06);z-index:2;position:relative}
-    .highlight-title{font-size:1.6rem;color:var(--accent);margin-bottom:12px;font-weight:600;text-shadow:0 0 10px rgba(0,255,255,0.22)}
-    .distribution-info{font-size:1rem;color:var(--muted);margin-bottom:14px}
+/* SOURCE LINK UNDER PRICE */
+.price-source{
+  margin-top:8px;
+}
+
+.price-source a{
+  color:#00ffff;
+  font-size:0.9rem;
+  text-decoration:none;
+  opacity:0.85;
+}
+
+.price-source a:hover{
+  opacity:1;
+  text-decoration:underline;
+}
+
+/* OTHER ELEMENTS (unchanged) */
+.section-box{
+  background:var(--card-bg);
+  border-radius:15px;
+  padding:22px;
+  margin:22px auto;
+  width:90%;
+  max-width:1000px;
+  box-shadow:0 0 12px rgba(255,255,255,0.06);
+  z-index:2;
+  position:relative;
+}
+
+.highlight-title{
+  font-size:1.6rem;
+  color:var(--accent);
+  margin-bottom:12px;
+  font-weight:600;
+  text-shadow:0 0 10px rgba(0,255,255,0.22);
+}
+
+.distribution-info{
+  font-size:1rem;
+  color:var(--muted);
+  margin-bottom:14px;
+}
+
 
    /* INPUT FIELDS — NEW STYLE */
 input{
@@ -347,4 +389,5 @@ input{
 </script>
 </body>
 </html>
+
 
