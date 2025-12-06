@@ -15,39 +15,65 @@
       overflow-x: hidden;
       position: relative;
     }
+    /* stars & saturn */
     .stars { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
-    .stars span {
-      position: absolute; display: block; width: 2px; height: 2px; background: white;
-      opacity: 0; border-radius: 50%; animation: twinkle 4s infinite ease-in-out;
-    }
-    @keyframes twinkle { 0%, 100% { opacity: 0; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.2); } }
+    .stars span { position: absolute; display: block; width: 2px; height: 2px; background: white; opacity: 0; border-radius: 50%; animation: twinkle 4s infinite ease-in-out; }
+    @keyframes twinkle { 0%,100%{opacity:0;transform:scale(0.8);}50%{opacity:1;transform:scale(1.2);} }
     .saturn { position: fixed; bottom: -100px; right: -150px; width: 420px; opacity: 0.25; z-index: 0; pointer-events: none; filter: drop-shadow(0 0 40px rgba(255,180,80,0.3)); animation: floatSaturn 20s ease-in-out infinite alternate; }
-    @keyframes floatSaturn { 0% { transform: translateY(0) rotate(0deg); } 100% { transform: translateY(-25px) rotate(2deg); } }
-    header { padding: 40px 10px; position: relative; z-index: 2; }
+    @keyframes floatSaturn { 0%{transform:translateY(0) rotate(0);}100%{transform:translateY(-25px) rotate(2deg);} }
+
+    header { padding: 40px 10px; position: relative; z-index: 3; }
     header img { width: 140px; display: block; margin: 0 auto; }
     h1 { margin: 10px 0; font-size: 2rem; }
-    .slogan { font-size: 1rem; color: #ccc; margin-bottom: 10px; }
-    .tagline { font-size: 1rem; color: #ffd966; font-style: italic; margin-bottom: 25px; }
+    .slogan { font-size: 1rem; color: #ccc; margin-bottom: 6px; }
+    .tagline { font-size: 1rem; color: #ffd966; font-style: italic; margin-bottom: 10px; }
+
+    /* Live price banner */
+    .price-banner {
+      position: relative;
+      z-index: 4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      background: rgba(0,0,0,0.4);
+      padding: 10px 16px;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 900px;
+      margin: 10px auto;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+      border: 1px solid rgba(255,255,255,0.04);
+    }
+    .price-left { text-align: left; min-width: 220px; }
+    .price-token { font-weight: 700; color: #00ffff; font-size: 1.1rem; }
+    .price-value { font-size: 1.4rem; font-weight: 700; }
+    .price-change { font-weight: 600; }
+    .price-down { color: #ff6b6b; }
+    .price-up { color: #7efc6b; }
+
     .section-box { background: rgba(255,255,255,0.05); border-radius: 15px; padding: 25px; margin: 25px auto; width: 90%; max-width: 1000px; box-shadow: 0 0 12px rgba(255,255,255,0.07); z-index: 2; position: relative; }
     .highlight-title { font-size: 1.6rem; color: #00ffff; margin-bottom: 15px; font-weight: 600; text-shadow: 0 0 10px rgba(0,255,255,0.4); }
     .distribution-info { font-size: 1rem; color: #bfefff; margin-bottom: 20px; }
+
     input { width: 80%; max-width: 420px; padding: 10px; margin: 8px; border-radius: 8px; border: none; font-size: 1rem; }
     button { background: #009dff; color: white; border: none; padding: 10px 20px; font-size: 1rem; border-radius: 8px; cursor: pointer; transition: 0.3s; }
     button:hover { background: #0078cc; }
     .pancake { margin-top: 20px; }
     .pancake a { display: inline-flex; align-items: center; gap: 8px; background: #ffcc00; color: #111; font-weight: 600; padding: 10px 18px; border-radius: 10px; text-decoration: none; transition: transform 0.3s; }
     .pancake a:hover { transform: scale(1.05); background: #ffe066; }
-    .pancake img { width: 26px; height: 26px; }
     iframe { width: 100%; height: 500px; border: none; border-radius: 10px; }
+
     .vision h2 { color: #ffcc00; font-size: 1.6rem; margin-bottom: 15px; }
     .vision p { line-height: 1.6; color: #ddd; }
     .whitepaper a { text-decoration: none; color: #ff5555; font-weight: 600; display: inline-flex; align-items: center; gap: 8px; transition: transform 0.3s; }
-    .whitepaper a:hover { transform: scale(1.05); color: #ff8888; }
-    .whitepaper img { width: 24px; height: 24px; }
     footer { background: #10162d; padding: 20px; margin-top: 50px; border-top: 1px solid rgba(255,255,255,0.1); position: relative; z-index: 2; }
     footer a { color: #00bfff; text-decoration: none; margin: 0 10px; display: inline-flex; align-items: center; gap: 6px; transition: color 0.3s, transform 0.3s; }
-    footer a:hover { color: #66d9ff; transform: scale(1.1); }
     footer img { width: 22px; height: 22px; vertical-align: middle; }
+    @media (max-width: 720px) {
+      .price-banner { flex-direction: column; align-items: center; gap: 6px; padding: 12px; }
+      .price-left { min-width: auto; text-align: center; }
+    }
   </style>
 </head>
 
@@ -62,57 +88,49 @@
     <div class="tagline">Innovating for the next era of space exploration.</div>
   </header>
 
-  <h2 class="highlight-title">1,000,000 RUZA Tokens Will Be Distributed for Free!</h2>
+  <!-- PRICE BANNER -->
+  <div class="price-banner" id="priceBanner">
+    <div class="price-left">
+      <div class="price-token">RUZA (RUZ)</div>
+      <div class="small">Price (BSC pair) & 24h change</div>
+    </div>
+    <div>
+      <div class="price-value" id="priceValue">—</div>
+      <div class="price-change" id="priceChange">Loading...</div>
+    </div>
+  </div>
 
-  <!-- THIS PART UPDATED TO LIVE DATA -->
+  <h2 class="highlight-title">1,000,000 RUZA Tokens Will Be Distributed for Free!</h2>
   <p class="distribution-info" id="claim-stats">Loading...</p>
 
   <section class="section-box claim-section">
     <h2>🎁 Claim 100 RUZ — One Time per Wallet</h2>
-
     <input id="claim-address" type="text" placeholder="Your BNB Smart Chain Wallet Address (0x...)" /><br />
     <input id="claim-ref" type="text" placeholder="Referral Address (Optional)" /><br />
     <input id="claim-contact" type="text" placeholder="Email or Telegram (Optional)" /><br />
-
     <button id="claim-btn">Submit Claim</button>
     <button id="copy-ref-link" style="margin-left:8px;">Copy My Referral Link</button>
-
     <p id="claim-msg" style="color:#bfefff;margin-top:12px;font-size:0.95rem;"></p>
-
-    <p style="font-size:0.85rem;color:#ccc;margin-top:10px;">
-      Each address can claim only once. Token transfers will be processed by the RUZA team.
-    </p>
-
-    <p style="font-size:0.9rem;color:#bfefff;margin-top:8px;">
-      Receive a <strong>25 RUZ bonus</strong> for every referred participant!
-    </p>
+    <p style="font-size:0.85rem;color:#ccc;margin-top:10px;">Each address can claim only once. Token transfers will be processed by the RUZA team.</p>
+    <p style="font-size:0.9rem;color:#bfefff;margin-top:8px;">Receive a <strong>25 RUZ bonus</strong> for every referred participant!</p>
   </section>
 
-  <!-- PancakeSwap -->
   <div class="pancake">
     <a href="https://pancakeswap.finance/swap?outputCurrency=0x2ec86e1b869cb251fe9441f02c01761543e6cbbd" target="_blank">
-      <img src="assets/pancake.png" alt="PancakeSwap" />
-      Trade RUZA on PancakeSwap
+      <img src="assets/pancake.png" alt="PancakeSwap" /> Trade RUZA on PancakeSwap
     </a>
   </div>
 
-  <!-- Live Chart -->
   <section class="section-box chart">
     <h2>📊 Live Chart</h2>
     <iframe src="https://dexscreener.com/bsc/0x2ec86e1b869cb251fe9441f02c01761543e6cbbd?embed=1&theme=light"></iframe>
   </section>
 
-  <!-- Vision Section -->
   <section class="section-box vision">
     <h2>🚀 RUZA Future Vision</h2>
-    <p>
-      RUZA Token is a long-term project dedicated to advancing the future of space tourism and exploration.
-      We will reinvest resources into research, development, and collaborations with the space industry
-      so RUZA becomes a major contributor to humanity’s journey beyond Earth.
-    </p>
+    <p>RUZA Token is a long-term project dedicated to advancing the future of space tourism and exploration. We will reinvest resources into research, development, and collaborations with the space industry so RUZA becomes a major contributor to humanity’s journey beyond Earth.</p>
   </section>
 
-  <!-- Whitepaper -->
   <section class="section-box whitepaper">
     <a href="assets/whitepaper.pdf" target="_blank">
       <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" alt="PDF" />
@@ -123,18 +141,13 @@
   <footer>
     <p>Join our community:</p>
     <p>
-      <a href="https://t.me/RUZAOFFICIAL" target="_blank">
-        <img src="assets/telegram.png" alt="Telegram" /> t.me/RUZAOFFICIAL
-      </a> |
-      <a href="https://instagram.com/RUZA_TOKEN" target="_blank">
-        <img src="assets/instagram.png" alt="Instagram" /> @RUZA_TOKEN
-      </a>
+      <a href="https://t.me/RUZAOFFICIAL" target="_blank"><img src="assets/telegram.png" alt="Telegram" /> t.me/RUZAOFFICIAL</a> |
+      <a href="https://instagram.com/RUZA_TOKEN" target="_blank"><img src="assets/instagram.png" alt="Instagram" /> @RUZA_TOKEN</a>
     </p>
   </footer>
 
-  <!-- FULL JAVASCRIPT WITH REFERRAL + LIVE STATS -->
   <script>
-    // Stars animation setup
+    // stars
     const starContainer = document.getElementById("stars");
     for (let i = 0; i < 80; i++) {
       const s = document.createElement("span");
@@ -144,21 +157,18 @@
       starContainer.appendChild(s);
     }
 
+    // config
     const apiBase = "https://a81912a7-42f3-4326-83a4-1182d241dad7-00-wmx91wfir4d7.janeway.replit.dev";
+    const tokenContract = "0x2ec86e1b869cb251fe9441f02c01761543e6cbbd"; // BSC token address
 
-    function isValidAddr(a) {
-      return typeof a === "string" && /^0x[a-fA-F0-9]{40}$/.test(a.trim());
-    }
+    function isValidAddr(a){ return typeof a==='string' && /^0x[a-fA-F0-9]{40}$/.test(a.trim()); }
 
-    const msg = document.getElementById("claim-msg");
-
-    // READ LIVE STATS
+    // load stats (tokens claimed)
     async function loadStats() {
       const box = document.getElementById("claim-stats");
       try {
-        const res = await fetch(apiBase + "/api/stats");
+        const res = await fetch(apiBase + "/api/stats?cb=" + Date.now(), { mode: "cors" });
         const data = await res.json();
-
         if (res.ok && data.totalClaimed !== undefined) {
           box.textContent = `${data.totalClaimed} out of 1,000,000 RUZA tokens have been claimed so far.`;
         } else {
@@ -170,66 +180,80 @@
     }
     loadStats();
 
-    // URL REFERRAL
-    const urlParams = new URLSearchParams(window.location.search);
-    const urlRef = urlParams.get("ref");
+    // load price via Dexscreener API (public)
+    async function loadPrice() {
+      const priceEl = document.getElementById("priceValue");
+      const changeEl = document.getElementById("priceChange");
+      try {
+        // Dexscreener token endpoint
+        const r = await fetch(`https://api.dexscreener.com/latest/dex/tokens/${tokenContract}`, { cache: "no-store" });
+        const j = await r.json();
+        // the API returns a 'pairs' array with pair objects; choose first pair on BSC
+        const pairs = j?.pairs || [];
+        const bscPair = pairs.find(p => (p.dexId && p.dexId.toLowerCase().includes("pancakeswap")) || p.chainId === "bsc") || pairs[0];
+        if (!bscPair) throw new Error("No pair");
+        const price = parseFloat(bscPair.priceUsd || bscPair.price).toFixed(6);
+        const change = parseFloat(bscPair.priceChange?.replace("%","")) || parseFloat(bscPair.priceChange24h) || 0;
+        priceEl.textContent = `$ ${price}`;
+        if (change >= 0) {
+          changeEl.textContent = `+${change.toFixed(2)}% (24h)`;
+          changeEl.className = "price-change price-up";
+        } else {
+          changeEl.textContent = `${change.toFixed(2)}% (24h)`;
+          changeEl.className = "price-change price-down";
+        }
+      } catch (err) {
+        priceEl.textContent = "Price unavailable";
+        changeEl.textContent = "";
+      }
+    }
+    loadPrice();
+    setInterval(loadPrice, 30_000);
+
+    // referrals: read from URL
+    const urlRef = new URLSearchParams(window.location.search).get("ref");
     if (isValidAddr(urlRef)) {
       document.getElementById("claim-ref").value = urlRef;
     }
 
-    // SEND CLAIM
+    // claim submission
+    const msg = document.getElementById("claim-msg");
     document.getElementById("claim-btn").onclick = async () => {
-      msg.style.color = "#bfefff";
-      msg.textContent = "Submitting...";
-
+      msg.style.color = "#bfefff"; msg.textContent = "Submitting...";
       const address = document.getElementById("claim-address").value.trim();
       let ref = document.getElementById("claim-ref").value.trim();
       const contact = document.getElementById("claim-contact").value.trim();
 
-      if (!isValidAddr(address)) {
-        msg.style.color = "#ff9999";
-        msg.textContent = "Invalid wallet address.";
-        return;
-      }
-
-      if (!isValidAddr(ref) || ref.toLowerCase() === address.toLowerCase()) {
-        ref = null;
-      }
+      if (!isValidAddr(address)) { msg.style.color = "#ff9999"; msg.textContent = "Invalid wallet address."; return; }
+      if (!isValidAddr(ref) || ref.toLowerCase() === address.toLowerCase()) ref = null;
 
       try {
         const res = await fetch(apiBase + "/api/claim", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ address, referrer: ref, contact: contact || null }),
+          body: JSON.stringify({ address, referrer: ref, contact: contact || null })
         });
-
         const data = await res.json();
-
         if (res.ok) {
-          msg.style.color = "#bfffbf";
-          msg.textContent = data.message || "Claim submitted!";
-          loadStats(); // update live stats immediately
+          msg.style.color = "#bfffbf"; msg.textContent = data.message || "Claim submitted!";
+          await loadStats();
         } else {
-          msg.style.color = "#ff9999";
-          msg.textContent = data.error;
+          msg.style.color = "#ff9999"; msg.textContent = data.error || "Submission failed.";
         }
       } catch (e) {
-        msg.style.color = "#ff9999";
-        msg.textContent = "Server connection error.";
+        msg.style.color = "#ff9999"; msg.textContent = "Server connection error.";
       }
     };
 
-    // COPY REFERRAL LINK
+    // copy referral
     document.getElementById("copy-ref-link").onclick = () => {
       const addr = document.getElementById("claim-address").value.trim();
       if (!isValidAddr(addr)) return alert("Enter your wallet address first.");
-
       const link = window.location.origin + window.location.pathname + "?ref=" + addr;
-      navigator.clipboard.writeText(link);
-      msg.style.color = "#bfefff";
-      msg.textContent = "Referral link copied!";
+      navigator.clipboard.writeText(link).then(() => {
+        msg.style.color = "#bfefff"; msg.textContent = "Referral link copied!";
+      });
     };
   </script>
-
 </body>
 </html>
