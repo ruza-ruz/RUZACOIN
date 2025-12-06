@@ -169,21 +169,38 @@
       <div class="slogan">The Future of Space Tourism Economy — Powered by Blockchain</div>
       <div class="tagline">Innovating for the next era of space exploration.</div>
 
-      <!-- LIVE PRICE -->
-      <div class="live-row">
-        <div class="price-card" id="pairInfo">RUZA (RUZ)</div>
-        <div class="price-card price-spot" id="livePrice">Loading...</div>
-        <div class="price-card small" id="priceChange">24h: —</div>
-      </div>
+      <!-- LIVE PRICE UPDATED BOX -->
+<div class="price-wrapper" style="
+  margin:18px auto 14px auto;
+  padding:14px;
+  background:rgba(0,255,255,0.12);
+  border:1px solid rgba(0,255,255,0.35);
+  border-radius:14px;
+  box-shadow:0 0 12px rgba(0,255,255,0.25);
+  max-width:360px;
+">
 
-      <!-- source link -->
-      <div style="margin-top:6px;">
-        <a href="https://dexscreener.com/bsc/0x2ec86e1b869cb251fe9441f02c01761543e6cbbd"
-           target="_blank"
-           style="color:#00ffff;font-size:0.85rem;text-decoration:none;">
-           View live chart on DexScreener
-        </a>
-      </div>
+  <div class="live-row" style="margin:0;">
+    <div class="price-card" style="background:transparent;border:none;box-shadow:none"
+         id="pairInfo">RUZA (RUZ)</div>
+
+    <div class="price-card price-spot" style="background:transparent;border:none;box-shadow:none"
+         id="livePrice">Loading...</div>
+
+    <div class="price-card small" style="background:transparent;border:none;box-shadow:none"
+         id="priceChange">24h: —</div>
+  </div>
+
+  <div style="margin-top:12px;">
+    <a href="https://dexscreener.com/bsc/0x2ec86e1b869cb251fe9441f02c01761543e6cbbd"
+       target="_blank"
+       style="color:#00f3ff;font-weight:600;font-size:0.9rem;text-decoration:underline;">
+       View Live Chart on DexScreener
+    </a>
+  </div>
+
+</div>
+
     </header>
 
     <h2 style="color:var(--accent);font-size:1.2rem;margin:6px 0">
@@ -385,4 +402,5 @@
 
 </body>
 </html>
+
 
