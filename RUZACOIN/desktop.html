@@ -198,11 +198,22 @@ input{
     <div class="tagline">Innovating for the next era of space exploration.</div>
 
     <!-- Live price + small hint -->
-    <div class="live-row" aria-live="polite">
-      <div class="price-card" id="pairInfo">RUZA (RUZ) — BSC pair</div>
-      <div class="price-card price-spot" id="livePrice">Loading price...</div>
-      <div class="price-card small" id="priceChange">24h: —</div>
+   <!-- LIVE PRICE BOX (NEW DESIGN) -->
+<div class="live-row">
+  <div class="price-card">
+    <div><strong>RUZA (RUZ)</strong></div>
+    <div>BSC Pair — Live Price</div>
+
+    <div class="price-spot" id="live-price">Loading...</div>
+
+    <div class="price-source">
+      <a href="https://dexscreener.com/bsc/0x2ec86e1b869cb251fe9441f02c01761543e6cbbd" target="_blank">
+        View live chart on DexScreener
+      </a>
     </div>
+  </div>
+</div>
+
   </header>
 
   <h2 class="highlight-title">1,000,000 RUZA Tokens Will Be Distributed for Free!</h2>
@@ -389,5 +400,6 @@ input{
 </script>
 </body>
 </html>
+
 
 
