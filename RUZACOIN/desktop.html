@@ -115,10 +115,11 @@
 }
 
 input{
-  width:80%;
-  max-width:420px;
-  padding:12px;
-  margin:10px;
+  width:90%;
+  max-width:360px;
+  padding:14px;
+  margin:12px auto;
+  display:block;
   border-radius:10px;
   border:none;
   font-size:1rem;
@@ -128,8 +129,23 @@ input{
   box-shadow:0 0 8px rgba(255,255,255,0.15);
 }
 
-button{background:var(--action);color:white;border:none;padding:10px 20px;font-size:1rem;border-radius:8px;cursor:pointer;transition:0.18s}
-button:hover{background:#0078cc}
+
+button{
+  background:var(--action);
+  color:white;
+  border:none;
+  padding:14px 22px;
+  font-size:1.05rem;
+  border-radius:10px;
+  cursor:pointer;
+  transition:0.18s;
+  margin-top:6px;
+}
+
+button:hover{
+  background:#0078cc;
+}
+
 .small{font-size:0.9rem;color:#ccc}
 
 .pancake{margin-top:18px}
@@ -193,16 +209,17 @@ footer a img{width:20px;height:20px;object-fit:contain}
 
 <div class="live-row">
   <div class="price-card">
-    <div><strong>RUZA (RUZ)</strong></div>
-    <div>BSC Pair — Live Price</div>
+    <div><strong>LIVE PRICE</strong></div>
     <div class="price-spot" id="live-price">Loading...</div>
-    <div class="price-source">
+
+    <div class="price-source" style="margin-top:12px;">
       <a href="https://dexscreener.com/bsc/0x2ec86e1b869cb251fe9441f02c01761543e6cbbd" target="_blank">
-        View live chart on DexScreener
+        View Live Chart on DexScreener
       </a>
     </div>
   </div>
 </div>
+
 
   </header>
 
@@ -320,8 +337,8 @@ async function loadPrice() {
       return;
     }
 
-    const formatted =
-      priceUsd >= 1 ? priceUsd.toFixed(4) : priceUsd.toFixed(8);
+   const formatted = Number(priceUsd).toFixed(4);
+
 
     priceEl.textContent = `$${formatted}`;
   } catch (err) {
@@ -391,3 +408,4 @@ setInterval(loadPrice, 30000);
 </script>
 </body>
 </html>
+
