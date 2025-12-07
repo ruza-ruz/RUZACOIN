@@ -80,16 +80,18 @@
       text-align:center;
     }
 
-    button{
-      background:var(--action);
-      color:#fff;
-      padding:10px;
-      border-radius:8px;
-      border:none;
-      font-weight:600;
-      cursor:pointer;
-      width:100%;
-    }
+button{
+  background:var(--action);
+  color:#fff;
+  padding:14px;           /* بزرگ‌تر شد */
+  border-radius:10px;
+  border:none;
+  font-weight:600;
+  cursor:pointer;
+  width:100%;
+  font-size:1rem;         /* بهتر و خواناتر */
+}
+
 
     /* Pancake button resize */
     .pancake a{
@@ -213,17 +215,25 @@
       <h3 style="margin:0 0 8px 0">🎁 Claim 100 RUZ — One Time per Wallet</h3>
 
       <input id="claim-address" placeholder="Your BNB Smart Chain Wallet (0x...)"
-       style="background:#fff;color:#000;border:1px solid #ccc;" />
+       style="background:#fff;color:#000;border:1px solid #ccc;
+       width:90%;margin:8px auto;display:block;border-radius:10px;
+       padding:12px;font-size:0.95rem;" />
 
 <input id="claim-ref" placeholder="Referral Address (Optional)"
-       style="background:#fff;color:#000;border:1px solid #ccc;" />
+       style="background:#fff;color:#000;border:1px solid #ccc;
+       width:90%;margin:8px auto;display:block;border-radius:10px;
+       padding:12px;font-size:0.95rem;" />
 
 <input id="claim-contact" placeholder="Email or Telegram (Optional)"
-       style="background:#fff;color:#000;border:1px solid #ccc;" />
+       style="background:#fff;color:#000;border:1px solid #ccc;
+       width:90%;margin:8px auto;display:block;border-radius:10px;
+       padding:12px;font-size:0.95rem;" />
+
 
 
       <button id="claim-btn">Submit Claim</button>
-      <button id="copy-ref-link" style="margin-top:8px;background:#444">Copy My Referral Link</button>
+     <button id="copy-ref-link" style="margin-top:8px;background:#444;padding:14px;font-size:1rem;border-radius:10px;">
+
 
       <p id="claim-msg" class="small" style="margin-top:8px;color:var(--muted)"></p>
 
@@ -327,7 +337,7 @@
       const ch = p.priceChange?.h24 || 0;
       changeEl.textContent = `24h: ${ch}%`;
 
-      pairEl.textContent = `${p.baseToken?.symbol || "RUZ"} — ${p.dex?.name || "BSC"}`;
+      pairEl.textContent = "LIVE PRICE";
 
     }catch(e){
       priceEl.textContent = "Price unavailable";
@@ -402,5 +412,6 @@
 
 </body>
 </html>
+
 
 
