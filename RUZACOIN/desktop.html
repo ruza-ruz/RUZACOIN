@@ -171,10 +171,24 @@ footer .links{display:flex;justify-content:center;gap:18px;flex-wrap:wrap}
 footer a{display:flex;align-items:center;gap:8px;color:#33cfff;text-decoration:none;font-weight:600}
 footer a img{width:20px;height:20px;object-fit:contain}
 
-@media(max-width:900px){
-  input{width:92%}
-  .price-spot{font-size:1rem}
+/* desktop input boxes full width inside section */
+.section-box input{
+  width:65%;
+  max-width:400px;
+  padding:10px 12px;
+  border-radius:8px;
+  border:1px solid rgba(255,255,255,0.25);
+  background:white;
+  color:#000;
 }
+
+/* mobile */
+@media(max-width:600px){
+  .section-box input{
+    width:85%;
+  }
+}
+
 @media(max-width:560px){
   header{padding:20px 8px}
   h1{font-size:1.5rem}
@@ -199,7 +213,8 @@ footer a img{width:20px;height:20px;object-fit:contain}
     <div><strong>LIVE PRICE</strong></div>
     <div class="price-spot" id="live-price">Loading...</div>
 
-    <div class="price-source" style="margin-top:12px;">
+    <div class="price-source" style="margin-top:12px; border-top:1px solid rgba(255,255,255,0.15); padding-top:10px;">
+
       <a href="https://dexscreener.com/bsc/0x2ec86e1b869cb251fe9441f02c01761543e6cbbd" target="_blank">
         View Live Chart on DexScreener
       </a>
@@ -396,5 +411,6 @@ setInterval(loadPrice, 30000);
 </script>
 </body>
 </html>
+
 
 
