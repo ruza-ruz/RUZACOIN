@@ -114,20 +114,7 @@
   margin-bottom:14px;
 }
 
-input{
-  width:90%;
-  max-width:360px;
-  padding:14px;
-  margin:12px auto;
-  display:block;
-  border-radius:10px;
-  border:none;
-  font-size:1rem;
-  background:#ffffff;
-  color:#000;
-  outline:none;
-  box-shadow:0 0 8px rgba(255,255,255,0.15);
-}
+price-source
 
 
 button{
@@ -284,7 +271,8 @@ footer a img{width:20px;height:20px;object-fit:contain}
   const apiBase = "https://a81912a7-42f3-4326-83a4-1182d241dad7-00-wmx91wfir4d7.janeway.replit.dev";
 
   /* CORRECT API (PAIR) */
-  const dexPairUrl = "https://api.dexscreener.com/latest/dex/pairs/bsc/0x2ec86e1b869cb251fe9441f02c01761543e6cbbd";
+  const dexPairUrl = "https://api.dexscreener.com/latest/dex/tokens/0x2ec86e1b869cb251fe9441f02c01761543e6cbbd";
+
 
   (function makeStars(){
     const container = document.getElementById("stars");
@@ -408,4 +396,5 @@ setInterval(loadPrice, 30000);
 </script>
 </body>
 </html>
+
 
