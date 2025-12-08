@@ -1,2 +1,431 @@
-<!-- force redeploy 2025-12-08 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>RUZA Token — The Future Vision</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root{
+      --accent:#00ffff;
+      --muted:#bfefff;
+      --bg1: #020010;
+      --bg2: #0a0433;
+      --card-bg: rgba(255,255,255,0.05);
+      --highlight:#ffcc00;
+      --action:#009dff;
+    }
+    html,body{margin:0;padding:0;height:100%;}
+    body{
+      font-family:"Poppins", Arial, sans-serif;
+      color:#fff;
+      text-align:center;
+      background: radial-gradient(circle at bottom, var(--bg1) 0%, var(--bg2) 70%, #000 100%);
+      overflow-x:hidden;
+      position:relative;
+      -webkit-font-smoothing:antialiased;
+    }
+
+    .stars{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;}
+    .stars span{position:absolute;display:block;width:2px;height:2px;background:white;opacity:0;border-radius:50%;animation:twinkle 4s infinite ease-in-out;}
+    @keyframes twinkle{0%,100%{opacity:0;transform:scale(.8)}50%{opacity:1;transform:scale(1.2)}}
+    .saturn{position:fixed;bottom:-100px;right:-150px;width:420px;opacity:.22;z-index:0;pointer-events:none;filter:drop-shadow(0 0 40px rgba(255,180,80,0.25));}
+
+    header{padding:36px 10px;position:relative;z-index:2}
+    header img{width:140px;display:block;margin:0 auto}
+    h1{margin:8px 0;font-size:2rem}
+    .slogan{font-size:1rem;color:#ccc;margin-bottom:6px}
+    .tagline{font-size:1rem;color:var(--highlight);font-style:italic;margin-bottom:18px}
+
+ /* LIVE PRICE BOX — NEW STYLE */
+.live-row{
+  display:flex;
+  justify-content:center;
+  gap:18px;
+  align-items:center;
+  flex-wrap:wrap;
+  margin:20px auto;
+  z-index:2;
+  position:relative;
+}
+
+.price-card{
+  background:rgba(0,255,255,0.12);
+  padding:16px 28px;
+  border-radius:14px;
+  box-shadow:0 0 18px rgba(0,255,255,0.25);
+  border:1px solid rgba(0,255,255,0.45);
+  font-weight:600;
+  color:var(--muted);
+  backdrop-filter:blur(5px);
+  text-align:center;
+}
+
+.price-card strong{
+  color:#fff;
+  font-size:1.15rem;
+}
+
+.price-spot{
+  font-size:1.35rem;
+  font-weight:700;
+  color:#fff;
+}
+
+.price-source{
+  margin-top:8px;
+}
+
+.price-source a{
+  color:#00ffff;
+  font-size:0.9rem;
+  text-decoration:none;
+  opacity:0.85;
+}
+
+.price-source a:hover{
+  opacity:1;
+  text-decoration:underline;
+}
+
+.section-box{
+  background:var(--card-bg);
+  border-radius:15px;
+  padding:22px;
+  margin:22px auto;
+  width:90%;
+  max-width:1000px;
+  box-shadow:0 0 12px rgba(255,255,255,0.06);
+  z-index:2;
+  position:relative;
+}
+
+.highlight-title{
+  font-size:1.6rem;
+  color:var(--accent);
+  margin-bottom:12px;
+  font-weight:600;
+  text-shadow:0 0 10px rgba(0,255,255,0.22);
+}
+
+.distribution-info{
+  font-size:1rem;
+  color:var(--muted);
+  margin-bottom:14px;
+}
+
+price-source
+
+
+button{
+  background:var(--action);
+  color:white;
+  border:none;
+  padding:14px 22px;
+  font-size:1.05rem;
+  border-radius:10px;
+  cursor:pointer;
+  transition:0.18s;
+  margin-top:6px;
+}
+
+button:hover{
+  background:#0078cc;
+}
+
+.small{font-size:0.9rem;color:#ccc}
+
+.pancake{margin-top:18px}
+
+.pancake a{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  background:var(--highlight);
+  color:#111;
+  font-weight:700;
+  padding:12px 20px;
+  border-radius:14px;
+  text-decoration:none;
+  transition:transform 0.25s ease, box-shadow 0.25s ease;
+  box-shadow:0 0 12px rgba(255,200,0,0.35);
+}
+
+.pancake a:hover{
+  transform:scale(1.12);
+  box-shadow:0 0 20px rgba(255,200,0,0.55);
+}
+
+.pancake img{width:26px;height:26px}
+
+iframe{width:100%;height:500px;border:none;border-radius:10px}
+
+.vision h2{color:var(--highlight);font-size:1.6rem;margin-bottom:12px}
+.vision p{line-height:1.6;color:#ddd}
+
+.whitepaper a{display:inline-flex;align-items:center;gap:10px;color:#ff5555;text-decoration:none;font-weight:600}
+.whitepaper img{width:26px;height:26px;object-fit:contain}
+
+footer{background:#10162d;padding:18px;margin-top:32px;border-top:1px solid rgba(255,255,255,0.06);position:relative;z-index:2}
+footer .links{display:flex;justify-content:center;gap:18px;flex-wrap:wrap}
+footer a{display:flex;align-items:center;gap:8px;color:#33cfff;text-decoration:none;font-weight:600}
+footer a img{width:20px;height:20px;object-fit:contain}
+
+/* desktop input boxes full width inside section */
+.section-box input {
+  width: 80%;
+  max-width: 420px;
+  padding: 10px;
+  margin: 8px;
+  border-radius: 8px;
+  border: none;
+  font-size: 1rem;
+  background: #ffffff;
+  color: #000;
+}
+    button {
+  background: #009dff;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-top: 8px;
+}
+
+button:hover {
+  background: #0078cc;
+}
+
+
+
+@media(max-width:560px){
+  header{padding:20px 8px}
+  h1{font-size:1.5rem}
+  .saturn{display:none}
+  .section-box{padding:16px;margin:14px auto}
+  iframe{height:320px}
+}
+  </style>
+</head>
+<body>
+  <div class="stars" id="stars"></div>
+  <img class="saturn" src="assets/saturn.png" alt="Saturn" />
+
+  <header>
+    <img src="assets/logo.png" alt="RUZA Logo" />
+    <h1>RUZA Token</h1>
+    <div class="slogan">The Future of Space Tourism Economy — Powered by Blockchain</div>
+    <div class="tagline">Innovating for the next era of space exploration.</div>
+
+<div class="live-row">
+  <div class="price-card">
+    <div><strong>LIVE PRICE</strong></div>
+    <div class="price-spot" id="live-price">Loading...</div>
+
+    <div class="price-source" style="margin-top:12px; border-top:1px solid rgba(255,255,255,0.15); padding-top:10px;">
+
+      <a href="https://dexscreener.com/bsc/0x2ec86e1b869cb251fe9441f02c01761543e6cbbd" target="_blank">
+        View Live Chart on DexScreener
+      </a>
+    </div>
+  </div>
+</div>
+
+
+  </header>
+
+  <h2 class="highlight-title">1,000,000 RUZA Tokens Will Be Distributed for Free!</h2>
+  <p class="distribution-info" id="claim-stats">Loading distribution stats...</p>
+
+  <section class="section-box claim-section" aria-labelledby="claimHeading">
+    <h2 id="claimHeading">🎁 Claim 100 RUZ — One Time per Wallet</h2>
+
+    <input id="claim-address" type="text" placeholder="Your BNB Smart Chain Wallet Address (0x...)" />
+    <br />
+    <input id="claim-ref" type="text" placeholder="Referral Address (Optional)" />
+    <br />
+    <input id="claim-contact" type="text" placeholder="Email or Telegram (Optional)" />
+    <br />
+    <button id="claim-btn">Submit Claim</button>
+    <button id="copy-ref-link" style="margin-left:8px;">Copy My Referral Link</button>
+
+    <p id="claim-msg" style="color:var(--muted);margin-top:12px;font-size:0.95rem;"></p>
+    <p class="small" style="margin-top:10px">Each address can claim only once. Token transfers will be processed by the RUZA team.</p>
+    <p class="small" style="margin-top:8px;color:var(--muted)">Receive a <strong>25 RUZ</strong> bonus for every referred participant!</p>
+  </section>
+
+  <div class="pancake">
+    <a href="https://pancakeswap.finance/swap?outputCurrency=0x2ec86e1b869cb251fe9441f02c01761543e6cbbd" target="_blank" rel="noopener">
+      <img src="assets/pancake.png" alt="PancakeSwap" /> Trade RUZA on PancakeSwap
+    </a>
+  </div>
+
+  <section class="section-box chart">
+    <h2>📊 Live Chart</h2>
+    <iframe src="https://dexscreener.com/bsc/0x2ec86e1b869cb251fe9441f02c01761543e6cbbd?embed=1&theme=light" title="RUZA chart"></iframe>
+  </section>
+
+  <section class="section-box vision">
+    <h2>🚀 RUZA Future Vision</h2>
+    <p>RUZA Token is a long-term project dedicated to advancing the future of space tourism and exploration.
+      We will reinvest resources into research, development, and collaborations with the space industry so RUZA becomes
+      a major contributor to humanity’s journey beyond Earth.</p>
+  </section>
+
+  <section class="section-box whitepaper">
+    <a href="assets/whitepaper.pdf" target="_blank" rel="noopener">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" alt="PDF" />
+      Download RUZA Whitepaper
+    </a>
+  </section>
+
+  <footer>
+    <p class="small">Join our community:</p>
+    <div class="links">
+      <a href="https://t.me/RUZAOFFICIAL" target="_blank" rel="noopener">
+        <img src="assets/telegram.png" alt="Telegram" /> t.me/RUZAOFFICIAL
+      </a>
+      <a href="https://instagram.com/RUZA_TOKEN" target="_blank" rel="noopener">
+        <img src="assets/instagram.png" alt="Instagram" /> @RUZA_TOKEN
+      </a>
+    </div>
+  </footer>
+
+<script>
+  const apiBase = "https://a81912a7-42f3-4326-83a4-1182d241dad7-00-wmx91wfir4d7.janeway.replit.dev";
+
+  /* CORRECT API (PAIR) */
+  const dexPairUrl = "https://api.dexscreener.com/latest/dex/tokens/0x2ec86e1b869cb251fe9441f02c01761543e6cbbd";
+
+
+  (function makeStars(){
+    const container = document.getElementById("stars");
+    for(let i=0;i<80;i++){
+      const s=document.createElement("span");
+      s.style.top = Math.random()*100 + "%";
+      s.style.left = Math.random()*100 + "%";
+      s.style.animationDelay = Math.random()*4 + "s";
+      container.appendChild(s);
+    }
+  })();
+
+  function isValidAddr(a){ return typeof a === "string" && /^0x[a-fA-F0-9]{40}$/.test(a.trim()); }
+
+  async function loadStats(){
+    const el = document.getElementById("claim-stats");
+    try{
+      const r = await fetch(apiBase + "/api/stats");
+      const j = await r.json();
+      if(r.ok && typeof j.totalClaimed !== "undefined"){
+        el.textContent = `${j.totalClaimed} out of 1,000,000 RUZA tokens have been claimed so far.`;
+      } else {
+        el.textContent = "Unable to load statistics.";
+      }
+    } catch(e){
+      el.textContent = "Unable to load statistics.";
+    }
+  }
+  loadStats();
+
+
+// ---------- PRICE VIA REPLIT PROXY (CORS FIX) ----------
+// ---------- REAL PRICE FROM DEX PAGE (WORKS 100%) ----------
+async function loadPriceFromDexPage() {
+  const priceEl = document.getElementById("live-price");
+
+  try {
+    const res = await fetch(
+      "https://corsproxy.io/?https://dexscreener.com/bsc/0x2ec86e1b869cb251fe9441f02c01761543e6cbbd"
+    );
+    const html = await res.text();
+
+    // Extract "priceUsd"
+    const match = html.match(/"priceUsd":"([\d.]+)"/);
+
+    if (match && match[1]) {
+      const price = Number(match[1]).toFixed(6);
+      priceEl.textContent = `$${price}`;
+    } else {
+      priceEl.textContent = "Unavailable";
+    }
+
+  } catch (e) {
+    priceEl.textContent = "Unavailable";
+  }
+}
+
+loadPriceFromDexPage();
+setInterval(loadPriceFromDexPage, 30000);
+
+
+
+  (function applyUrlRef(){
+    const params = new URLSearchParams(window.location.search);
+    const ref = params.get("ref");
+    if(isValidAddr(ref)){
+      document.getElementById("claim-ref").value = ref;
+    }
+  })();
+
+  document.getElementById("claim-btn").addEventListener("click", async ()=>{
+    const msg = document.getElementById("claim-msg");
+    msg.style.color = "var(--muted)";
+    msg.textContent = "Submitting...";
+    const address = document.getElementById("claim-address").value.trim();
+    const refInput = document.getElementById("claim-ref").value.trim();
+    const contact = document.getElementById("claim-contact").value.trim();
+
+    if(!isValidAddr(address)){
+      msg.style.color = "#ff9999";
+      msg.textContent = "Invalid wallet address.";
+      return;
+    }
+
+    let ref = refInput;
+    if(!isValidAddr(ref) || ref.toLowerCase() === address.toLowerCase()) ref = null;
+
+    try {
+      const res = await fetch(apiBase + "/api/claim", {
+        method: "POST",
+        headers: {"Content-Type":"application/json"},
+        body: JSON.stringify({ address, referrer: ref, contact: contact || null })
+      });
+      const data = await res.json();
+      if(res.ok){
+        msg.style.color = "#bfffbf";
+        msg.textContent = data.message || "Claim submitted!";
+        loadStats();
+      } else {
+        msg.style.color = "#ff9999";
+        msg.textContent = data.error || "Submission failed.";
+      }
+    } catch(e){
+      msg.style.color = "#ff9999";
+      msg.textContent = "Server connection error.";
+    }
+  });
+
+  document.getElementById("copy-ref-link").addEventListener("click", ()=>{
+    const addr = document.getElementById("claim-address").value.trim();
+    if(!isValidAddr(addr)) return alert("Enter your wallet address first.");
+    const link = window.location.origin + window.location.pathname + "?ref=" + addr;
+    navigator.clipboard.writeText(link).then(()=>{
+      const msg = document.getElementById("claim-msg");
+      msg.style.color = "var(--muted)";
+      msg.textContent = "Referral link copied!";
+    });
+  });
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
 
