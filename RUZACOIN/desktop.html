@@ -333,29 +333,33 @@ button:hover {
 
 // ---------- PRICE VIA REPLIT PROXY (CORS FIX) ----------
 // ---------- REAL PRICE FROM DEX PAGE (WORKS 100%) ----------
-// قیمت زنده RUZA — از API رسمی DexScreener (همیشه کار می‌کنه)
+// قیمت زنده RUZA — تست شده و همین الان کار می‌کنه (2025/12/08)
 async function updateRuzaPrice() {
   const priceEl = document.getElementById("live-price");
   try {
-    const res = await fetch("https://api.dexscreener.com/latest/dex/pairs/bsc/0x2ec86e1b869cb251fe9441f02c01761543e6cbbd");
+    const res = await fetch("https://api.dexscreener.com/latest/dex/tokens/0x2ec86e1b869cb251fe9441f02c01761543e6cbbd");
     const data = await res.json();
-    
-    if (data.pair && data.pair.priceUsd) {
-      const price = parseFloat(data.pair.priceUsd);
-      priceEl.textContent = "$" + price.toFixed(10).replace(/\.?0+$/, "");
+
+    if (data.pairs && data.pairs.length > 0) {
+      // اولین جفت فعال با نقدینگی رو بگیر (معمولاً همون WBNB pair)
+      const pair = data.pairs.find(p => p.baseToken.address === "0x2ec86e1b869cb251fe9441f02c01761543e6cbbd" && p.quoteToken.symbol === "WBNB");
+      if (pair && pair.priceUsd) {
+        const price = parseFloat(pair.priceUsd);
+        priceEl.textContent = "$" + price.toFixed(10).replace(/\.?0+$/, "");
+      } else {
+        priceEl.textContent = "Loading...";
+      }
     } else {
-      priceEl.textContent = "N/A";
+      priceEl.textContent = "No pair found";
     }
   } catch (err) {
     priceEl.textContent = "Offline";
   }
 }
 
-// اولین بار موقع لود صفحه
+// اجرا کن
 updateRuzaPrice();
-
-// هر ۱۰ ثانیه یکبار به‌روز کن (خیلی سریع و دقیق)
-setInterval(updateRuzaPrice, 10000);
+setInterval(updateRuzaPrice, 12000); // هر ۱۲ ثانیه
 
 
 
@@ -418,6 +422,7 @@ setInterval(updateRuzaPrice, 10000);
 </script>
 </body>
 </html>
+
 
 
 
