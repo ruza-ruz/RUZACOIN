@@ -296,11 +296,8 @@ button:hover {
 
 <script>
   const apiBase = "https://a81912a7-42f3-4326-83a4-1182d241dad7-00-wmx91wfir4d7.janeway.replit.dev";
-
-  /* CORRECT API (PAIR) */
   const dexPairUrl = "https://api.dexscreener.com/latest/dex/tokens/0x2ec86e1b869cb251fe9441f02c01761543e6cbbd";
-
-
+  
   (function makeStars(){
     const container = document.getElementById("stars");
     for(let i=0;i<80;i++){
@@ -311,9 +308,9 @@ button:hover {
       container.appendChild(s);
     }
   })();
-
+  
   function isValidAddr(a){ return typeof a === "string" && /^0x[a-fA-F0-9]{40}$/.test(a.trim()); }
-
+  
   async function loadStats(){
     const el = document.getElementById("claim-stats");
     try{
@@ -330,37 +327,30 @@ button:hover {
   }
   loadStats();
 
-
-// ---------- PRICE VIA REPLIT PROXY (CORS FIX) ----------
-// ---------- REAL PRICE FROM DEX PAGE (WORKS 100%) ----------
-// قیمت زنده RUZA — تست شده و همین الان کار می‌کنه (2025/12/08)
-async function updateRuzaPrice() {
-  const priceEl = document.getElementById("live-price");
-  try {
-    const res = await fetch("https://api.dexscreener.com/latest/dex/tokens/0x2ec86e1b869cb251fe9441f02c01761543e6cbbd");
-    const data = await res.json();
-
-    if (data.pairs && data.pairs.length > 0) {
-      // اولین جفت فعال با نقدینگی رو بگیر (معمولاً همون WBNB pair)
-      const pair = data.pairs.find(p => p.baseToken.address === "0x2ec86e1b869cb251fe9441f02c01761543e6cbbd" && p.quoteToken.symbol === "WBNB");
-      if (pair && pair.priceUsd) {
-        const price = parseFloat(pair.priceUsd);
-        priceEl.textContent = "$" + price.toFixed(10).replace(/\.?0+$/, "");
+  // قیمت زنده RUZA — ۱۰۰٪ کار می‌کنه
+  async function updateRuzaPrice() {
+    const priceEl = document.getElementById("live-price");
+    try {
+      const res = await fetch("https://api.dexscreener.com/latest/dex/tokens/0x2ec86e1b869cb251fe9441f02c01761543e6cbbd");
+      const data = await res.json();
+      if (data.pairs && data.pairs.length > 0) {
+        const pair = data.pairs.find(p => p.baseToken.address === "0x2ec86e1b869cb251fe9441f02c01761543e6cbbd" && p.quoteToken.symbol === "WBNB");
+        if (pair && pair.priceUsd) {
+          const price = parseFloat(pair.priceUsd);
+          priceEl.textContent = "$" + price.toFixed(10).replace(/\.?0+$/, "");
+        } else {
+          priceEl.textContent = "Loading...";
+        }
       } else {
-        priceEl.textContent = "Loading...";
+        priceEl.textContent = "No pair found";
       }
-    } else {
-      priceEl.textContent = "No pair found";
+    } catch (err) {
+      priceEl.textContent = "Offline";
     }
-  } catch (err) {
-    priceEl.textContent = "Offline";
   }
-}
-
-updateRuzaPrice();
-setInterval(updateRuzaPrice, 12000); // هر ۱۲ ثانیه
-
-
+  
+  updateRuzaPrice();
+  setInterval(updateRuzaPrice, 12000); // هر ۱۲ ثانیه به‌روز می‌شه
 
   (function applyUrlRef(){
     const params = new URLSearchParams(window.location.search);
@@ -369,7 +359,7 @@ setInterval(updateRuzaPrice, 12000); // هر ۱۲ ثانیه
       document.getElementById("claim-ref").value = ref;
     }
   })();
-
+  
   document.getElementById("claim-btn").addEventListener("click", async ()=>{
     const msg = document.getElementById("claim-msg");
     msg.style.color = "var(--muted)";
@@ -377,16 +367,13 @@ setInterval(updateRuzaPrice, 12000); // هر ۱۲ ثانیه
     const address = document.getElementById("claim-address").value.trim();
     const refInput = document.getElementById("claim-ref").value.trim();
     const contact = document.getElementById("claim-contact").value.trim();
-
     if(!isValidAddr(address)){
       msg.style.color = "#ff9999";
       msg.textContent = "Invalid wallet address.";
       return;
     }
-
     let ref = refInput;
     if(!isValidAddr(ref) || ref.toLowerCase() === address.toLowerCase()) ref = null;
-
     try {
       const res = await fetch(apiBase + "/api/claim", {
         method: "POST",
@@ -407,7 +394,7 @@ setInterval(updateRuzaPrice, 12000); // هر ۱۲ ثانیه
       msg.textContent = "Server connection error.";
     }
   });
-
+  
   document.getElementById("copy-ref-link").addEventListener("click", ()=>{
     const addr = document.getElementById("claim-address").value.trim();
     if(!isValidAddr(addr)) return alert("Enter your wallet address first.");
@@ -421,6 +408,7 @@ setInterval(updateRuzaPrice, 12000); // هر ۱۲ ثانیه
 </script>
 </body>
 </html>
+
 
 
 
