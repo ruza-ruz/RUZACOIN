@@ -332,27 +332,34 @@ button:hover {
 
 
 // ---------- PRICE VIA REPLIT PROXY (CORS FIX) ----------
-async function loadPrice() {
+// ---------- REAL PRICE FROM DEX PAGE (WORKS 100%) ----------
+async function loadPriceFromDexPage() {
   const priceEl = document.getElementById("live-price");
 
   try {
-    const res = await fetch(apiBase + "/api/liveprice");
-    const data = await res.json();
+    const res = await fetch(
+      "https://corsproxy.io/?https://dexscreener.com/bsc/0x2ec86e1b869cb251fe9441f02c01761543e6cbbd"
+    );
+    const html = await res.text();
 
-    if (!data || !data.price) {
-      priceEl.textContent = "Price unavailable";
-      return;
+    // Extract "priceUsd"
+    const match = html.match(/"priceUsd":"([\d.]+)"/);
+
+    if (match && match[1]) {
+      const price = Number(match[1]).toFixed(6);
+      priceEl.textContent = `$${price}`;
+    } else {
+      priceEl.textContent = "Unavailable";
     }
 
-    const formatted = Number(data.price).toFixed(4);
-    priceEl.textContent = `$${formatted}`;
-  } catch (err) {
-    priceEl.textContent = "Price unavailable";
+  } catch (e) {
+    priceEl.textContent = "Unavailable";
   }
 }
 
-loadPrice();
-setInterval(loadPrice, 30000);
+loadPriceFromDexPage();
+setInterval(loadPriceFromDexPage, 30000);
+
 
 
   (function applyUrlRef(){
@@ -414,6 +421,7 @@ setInterval(loadPrice, 30000);
 </script>
 </body>
 </html>
+
 
 
 
