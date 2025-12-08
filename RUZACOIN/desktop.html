@@ -333,32 +333,29 @@ button:hover {
 
 // ---------- PRICE VIA REPLIT PROXY (CORS FIX) ----------
 // ---------- REAL PRICE FROM DEX PAGE (WORKS 100%) ----------
-async function loadPriceFromDexPage() {
+// قیمت زنده RUZA — از API رسمی DexScreener (همیشه کار می‌کنه)
+async function updateRuzaPrice() {
   const priceEl = document.getElementById("live-price");
-
   try {
-    const res = await fetch(
-      "https://corsproxy.io/?https://dexscreener.com/bsc/0x2ec86e1b869cb251fe9441f02c01761543e6cbbd"
-    );
-    const html = await res.text();
-
-    // Extract "priceUsd"
-    const match = html.match(/"priceUsd":"([\d.]+)"/);
-
-    if (match && match[1]) {
-      const price = Number(match[1]).toFixed(6);
-      priceEl.textContent = `$${price}`;
+    const res = await fetch("https://api.dexscreener.com/latest/dex/pairs/bsc/0x2ec86e1b869cb251fe9441f02c01761543e6cbbd");
+    const data = await res.json();
+    
+    if (data.pair && data.pair.priceUsd) {
+      const price = parseFloat(data.pair.priceUsd);
+      priceEl.textContent = "$" + price.toFixed(10).replace(/\.?0+$/, "");
     } else {
-      priceEl.textContent = "Unavailable";
+      priceEl.textContent = "N/A";
     }
-
-  } catch (e) {
-    priceEl.textContent = "Unavailable";
+  } catch (err) {
+    priceEl.textContent = "Offline";
   }
 }
 
-loadPriceFromDexPage();
-setInterval(loadPriceFromDexPage, 30000);
+// اولین بار موقع لود صفحه
+updateRuzaPrice();
+
+// هر ۱۰ ثانیه یکبار به‌روز کن (خیلی سریع و دقیق)
+setInterval(updateRuzaPrice, 10000);
 
 
 
@@ -421,6 +418,7 @@ setInterval(loadPriceFromDexPage, 30000);
 </script>
 </body>
 </html>
+
 
 
 
