@@ -168,9 +168,8 @@ button{
     <header>
       <img src="assets/logo.png" alt="RUZA Logo" />
       <h1>RUZA Token</h1>
-      <div class="slogan">Upload Your Mind. Live Forever.</div>
-<div class="tagline">Tomorrow, you will wake up again in a new body.</div>
-
+      <div class="slogan">The Future of Space Tourism Economy — Powered by Blockchain</div>
+      <div class="tagline">Innovating for the next era of space exploration.</div>
 
       <!-- LIVE PRICE UPDATED BOX -->
 <div class="price-wrapper" style="
@@ -190,7 +189,8 @@ button{
     <div class="price-card price-spot" style="background:transparent;border:none;box-shadow:none"
          id="livePrice">Loading...</div>
 
-    
+    <div class="price-card small" style="background:transparent;border:none;box-shadow:none"
+         id="priceChange">24h: —</div>
   </div>
 
   <div style="margin-top:12px;">
@@ -233,16 +233,9 @@ button{
 
       <button id="claim-btn">Submit Claim</button>
     <button id="copy-ref-link" 
-        style="margin-top:8px;
-        background:#ffcc00;
-        color:#111;
-        padding:14px;
-        font-size:1rem;
-        border-radius:10px;
-        font-weight:700;">
+        style="margin-top:8px;background:#444;padding:14px;font-size:1rem;border-radius:10px;">
   COPY MY REFERRAL LINK
 </button>
-
 
 
 
@@ -271,19 +264,10 @@ button{
     </section>
 
     <section class="section-box">
-
-  <img src="assets/logo.png"
-       style="width:48px;height:48px;margin-bottom:6px;" alt="RUZA Logo">
-
-  <h3 style="margin:0 0 8px 0">RUZA Future Vision</h3>
-
-      <p style="color:#ddd;line-height:1.6">
-  RUZA Token is dedicated to advancing the future of mind uploading, digital consciousness, 
-  and life beyond biological limits. Our mission is to fund real-world research in 
-  brain-computer interfaces, whole-brain emulation, and the technologies required to transfer 
-  human intelligence into digital or robotic bodies.
-</p>
-
+      <h3 style="margin:0 0 8px 0">🚀 RUZA Future Vision</h3>
+      <p class="small" style="color:#ddd;line-height:1.5">
+        RUZA Token is dedicated to driving innovation in the blockchain-powered space tourism industry.
+      </p>
     </section>
 
     <section class="section-box whitepaper" style="margin-top:8px">
@@ -330,42 +314,41 @@ button{
   }
   loadStats();
 
-<script>
-/* --- FIXED MOBILE PRICE LOADER --- */
+  /* ---- PRICE (exact Dex format) ---- */
+  async function loadPrice(){
+    const priceEl = document.getElementById("livePrice");
+    const changeEl = document.getElementById("priceChange");
+    const pairEl = document.getElementById("pairInfo");
 
-const dexTokenUrl =
-  "https://api.dexscreener.com/latest/dex/tokens/0x2ec86e1b869cb251fe9441f02c01761543e6cbbd";
+    try{
+      const res = await fetch(dexTokenUrl);
+      const data = await res.json();
 
-async function loadPrice() {
-  const priceEl = document.getElementById("livePrice");
-  if (!priceEl) return;
+      if(!data?.pairs?.length){
+        priceEl.textContent = "Price unavailable";
+        return;
+      }
 
-  priceEl.textContent = "Loading...";
+      const p = data.pairs[0];
 
-  try {
-    const res = await fetch(dexTokenUrl, { cache: "no-store" });
-    const data = await res.json();
+      /* price EXACTLY like DexScreener */
+      const priceRaw = p.priceUsd || p.price || "0";
+      const formattedPrice = Number(priceRaw).toString(); // حذف صفرهای اضافی
 
-    if (!data?.pairs?.length) {
-      priceEl.textContent = "Unavailable";
-      return;
+      priceEl.textContent = "$" + formattedPrice;
+
+      
+      
+
+      pairEl.textContent = "LIVE PRICE";
+
+    }catch(e){
+      priceEl.textContent = "Price unavailable";
     }
-
-    const p = data.pairs[0];
-    const price = Number(p.priceUsd || 0)
-      .toFixed(5)
-      .replace(/\.?0+$/, ""); // حذف صفر اضافه
-
-    priceEl.textContent = "$" + price;
-  } catch (err) {
-    console.log("Price error:", err);
-    priceEl.textContent = "Unavailable";
   }
-}
 
-loadPrice();
-setInterval(loadPrice, 30000);
-</script>
+  loadPrice();
+  setInterval(loadPrice, 30000);
 
   /* ---- APPLY REF ---- */
   (()=>{  
@@ -432,10 +415,6 @@ setInterval(loadPrice, 30000);
 
 </body>
 </html>
-
-
-
-
 
 
 
