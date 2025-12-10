@@ -26,10 +26,7 @@
       -webkit-font-smoothing:antialiased;
     }
 
-    .stars{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;}
-    .stars span{position:absolute;display:block;width:2px;height:2px;background:white;opacity:0;border-radius:50%;animation:twinkle 4s infinite ease-in-out;}
-    @keyframes twinkle{0%,100%{opacity:0;transform:scale(.8)}50%{opacity:1;transform:scale(1.2)}}
-    .saturn{position:fixed;bottom:-100px;right:-150px;width:420px;opacity:.22;z-index:0;pointer-events:none;filter:drop-shadow(0 0 40px rgba(255,180,80,0.25));}
+    
 
     header{padding:36px 10px;position:relative;z-index:2}
     header img{width:140px;display:block;margin:0 auto}
@@ -211,9 +208,6 @@ button:hover {
   </style>
 </head>
 <body>
-  <div class="stars" id="stars"></div>
-  <img class="saturn" src="assets/saturn.png" alt="Saturn" />
-
   <header>
     <img src="assets/logo.png" alt="RUZA Logo" />
     <h1>RUZA Token</h1>
@@ -271,7 +265,11 @@ button:hover {
   </section>
 
   <section class="section-box vision">
-  <h2>🧠 RUZA Future Vision</h2>
+    <img src="https://cdn-icons-png.flaticon.com/512/4712/4712100.png" 
+         style="width:48px;height:48px;margin-bottom:10px;" alt="Robot Icon">
+
+    <h2> RUZA Future Vision</h2>
+
   <p>RUZA Token is dedicated to advancing the future of mind uploading, digital consciousness, and life beyond biological limits. Our mission is to fund real-world research in brain-computer interfaces, whole-brain emulation, and the technologies required to transfer human intelligence into digital or robotic bodies.</p>
 </section>
 
@@ -300,18 +298,6 @@ button:hover {
 
   /* CORRECT API (PAIR) */
   const dexPairUrl = "https://api.dexscreener.com/latest/dex/tokens/0x2ec86e1b869cb251fe9441f02c01761543e6cbbd";
-
-
-  (function makeStars(){
-    const container = document.getElementById("stars");
-    for(let i=0;i<80;i++){
-      const s=document.createElement("span");
-      s.style.top = Math.random()*100 + "%";
-      s.style.left = Math.random()*100 + "%";
-      s.style.animationDelay = Math.random()*4 + "s";
-      container.appendChild(s);
-    }
-  })();
 
   function isValidAddr(a){ return typeof a === "string" && /^0x[a-fA-F0-9]{40}$/.test(a.trim()); }
 
@@ -422,6 +408,7 @@ setInterval(loadPriceFromDexPage, 30000);
 </script>
 </body>
 </html>
+
 
 
 
