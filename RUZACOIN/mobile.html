@@ -330,42 +330,42 @@ button{
   }
   loadStats();
 
-  /* ---- PRICE (exact Dex format) ---- */
-  async function loadPrice(){
-    const priceEl = document.getElementById("livePrice");
-    const changeEl = document.getElementById("priceChange");
-    const pairEl = document.getElementById("pairInfo");
+<script>
+/* --- FIXED MOBILE PRICE LOADER --- */
 
-    try{
-      const res = await fetch(dexTokenUrl);
-      const data = await res.json();
+const dexTokenUrl =
+  "https://api.dexscreener.com/latest/dex/tokens/0x2ec86e1b869cb251fe9441f02c01761543e6cbbd";
 
-      if(!data?.pairs?.length){
-        priceEl.textContent = "Price unavailable";
-        return;
-      }
+async function loadPrice() {
+  const priceEl = document.getElementById("livePrice");
+  if (!priceEl) return;
 
-      const p = data.pairs[0];
+  priceEl.textContent = "Loading...";
 
-      /* price EXACTLY like DexScreener */
-      const priceRaw = p.priceUsd || p.price || "0";
-      const formattedPrice = Number(priceRaw).toString(); // حذف صفرهای اضافی
+  try {
+    const res = await fetch(dexTokenUrl, { cache: "no-store" });
+    const data = await res.json();
 
-      priceEl.textContent = "$" + formattedPrice;
-
-      /* 24h change */
-      const ch = p.priceChange?.h24 || 0;
-      changeEl.textContent = `24h: ${ch}%`;
-
-      pairEl.textContent = "LIVE PRICE";
-
-    }catch(e){
-      priceEl.textContent = "Price unavailable";
+    if (!data?.pairs?.length) {
+      priceEl.textContent = "Unavailable";
+      return;
     }
-  }
 
-  loadPrice();
-  setInterval(loadPrice, 30000);
+    const p = data.pairs[0];
+    const price = Number(p.priceUsd || 0)
+      .toFixed(5)
+      .replace(/\.?0+$/, ""); // حذف صفر اضافه
+
+    priceEl.textContent = "$" + price;
+  } catch (err) {
+    console.log("Price error:", err);
+    priceEl.textContent = "Unavailable";
+  }
+}
+
+loadPrice();
+setInterval(loadPrice, 30000);
+</script>
 
   /* ---- APPLY REF ---- */
   (()=>{  
@@ -432,6 +432,7 @@ button{
 
 </body>
 </html>
+
 
 
 
