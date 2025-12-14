@@ -342,18 +342,23 @@ button{
 
   /* ---- PRICE (exact Dex format) ---- */
   async function loadPrice(){
-    const priceEl = document.getElementById("livePrice");
-    const changeEl = document.getElementById("priceChange");
-    const pairEl = document.getElementById("pairInfo");
+  const priceEl = document.getElementById("livePrice");
 
-    try{
-      const res = await fetch(dexTokenUrl);
-      const data = await res.json();
+  try{
+    const res = await fetch(apiBase + "/api/liveprice");
+    const data = await res.json();
 
-      if(!data?.pairs?.length){
-        priceEl.textContent = "Price unavailable";
-        return;
-      }
+    if(!data.price){
+      priceEl.textContent = "Price unavailable";
+      return;
+    }
+
+    priceEl.textContent = "$" + Number(data.price).toString();
+  }catch(e){
+    priceEl.textContent = "Price unavailable";
+  }
+}
+
 
       const p = data.pairs[0];
 
@@ -441,6 +446,7 @@ button{
 
 </body>
 </html>
+
 
 
 
