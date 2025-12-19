@@ -497,47 +497,56 @@ setInterval(loadPriceFromDexPage, 30000);
     });
   });
   // ================= RUZA AI CHAT LOGIC =================
-const chatToggle = document.getElementById("ruza-chat-toggle");
-const chatBox = document.getElementById("ruza-chat");
-const sendBtn = document.getElementById("ruza-send");
-const userInput = document.getElementById("ruza-user-input");
-const messagesBox = document.getElementById("ruza-chat-messages");
+document.addEventListener("DOMContentLoaded", () => {
 
-chatToggle.onclick = () => {
-  chatBox.style.display =
-    chatBox.style.display === "flex" ? "none" : "flex";
-};
+  const chatToggle = document.getElementById("ruza-chat-toggle");
+  const chatBox = document.getElementById("ruza-chat");
+  const sendBtn = document.getElementById("ruza-send");
+  const userInput = document.getElementById("ruza-user-input");
+  const messagesBox = document.getElementById("ruza-chat-messages");
 
-sendBtn.onclick = sendMessage;
-userInput.addEventListener("keypress", e => {
-  if(e.key === "Enter") sendMessage();
-});
+  if (!chatToggle || !chatBox) {
+    console.error("RUZA Chat elements not found");
+    return;
+  }
 
-async function sendMessage(){
-  const text = userInput.value.trim();
-  if(!text) return;
+  chatToggle.onclick = () => {
+    chatBox.style.display =
+      chatBox.style.display === "flex" ? "none" : "flex";
+  };
 
-  messagesBox.innerHTML += `<div class="user-msg">${text}</div>`;
-  userInput.value = "";
-  messagesBox.scrollTop = messagesBox.scrollHeight;
+  sendBtn.onclick = sendMessage;
+  userInput.addEventListener("keypress", e => {
+    if (e.key === "Enter") sendMessage();
+  });
 
-  try{
-    const res = await fetch(apiBase + "/api/chat", {
-      method:"POST",
-      headers:{ "Content-Type":"application/json" },
-      body: JSON.stringify({ message: text })
-    });
-    const data = await res.json();
+  async function sendMessage(){
+    const text = userInput.value.trim();
+    if(!text) return;
 
-    messagesBox.innerHTML +=
-      `<div class="ai-msg">${data.reply || "I couldn't answer that."}</div>`;
+    messagesBox.innerHTML += `<div class="user-msg">${text}</div>`;
+    userInput.value = "";
     messagesBox.scrollTop = messagesBox.scrollHeight;
 
-  } catch(e){
-    messagesBox.innerHTML +=
-      `<div class="ai-msg">Connection error. Please try again.</div>`;
+    try{
+      const res = await fetch("/api/chat", {
+        method:"POST",
+        headers:{ "Content-Type":"application/json" },
+        body: JSON.stringify({ message: text })
+      });
+      const data = await res.json();
+
+      messagesBox.innerHTML +=
+        `<div class="ai-msg">${data.reply || "No response."}</div>`;
+      messagesBox.scrollTop = messagesBox.scrollHeight;
+
+    } catch(err){
+      messagesBox.innerHTML +=
+        `<div class="ai-msg">Server connection error.</div>`;
+    }
   }
-}
+});
+
 
 </script>
   <!-- ================= RUZA AI CHAT ================= -->
@@ -560,6 +569,7 @@ async function sendMessage(){
 
 </body>
 </html>
+
 
 
 
