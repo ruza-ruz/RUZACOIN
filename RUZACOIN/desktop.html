@@ -529,7 +529,8 @@ document.addEventListener("DOMContentLoaded", () => {
     messagesBox.scrollTop = messagesBox.scrollHeight;
 
     try{
-      const res = await fetch(`${API_BASE}/api/chat`, {
+      const res = await fetch(`${apiBase}/api/chat`, {
+
 
         method:"POST",
         headers:{ "Content-Type":"application/json" },
@@ -570,6 +571,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 </body>
 </html>
+
 
 
 
