@@ -66,6 +66,13 @@
   margin-bottom:8px;
   text-align:right;
 }
+    .ai-msg,
+.user-msg{
+  unicode-bidi: plaintext;
+  direction: rtl;
+  text-align: right;
+}
+
 
 #ruza-chat-input{
   display:flex;
@@ -524,7 +531,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const text = userInput.value.trim();
     if(!text) return;
 
-    messagesBox.innerHTML += `<div class="user-msg">${text}</div>`;
+    messagesBox.innerHTML +=
+  `<div class="user-msg" dir="auto">${text}</div>`;
+
     userInput.value = "";
     messagesBox.scrollTop = messagesBox.scrollHeight;
 
@@ -539,7 +548,8 @@ document.addEventListener("DOMContentLoaded", () => {
       const data = await res.json();
 
       messagesBox.innerHTML +=
-        `<div class="ai-msg">${data.reply || "No response."}</div>`;
+  `<div class="ai-msg" dir="auto">${data.reply || "No response."}</div>`;
+
       messagesBox.scrollTop = messagesBox.scrollHeight;
 
     } catch(err){
@@ -556,9 +566,10 @@ document.addEventListener("DOMContentLoaded", () => {
   <div id="ruza-chat-header">RUZA AI Assistant</div>
 
   <div id="ruza-chat-messages">
-    <div class="ai-msg">
-      Hi! I can help you claim RUZA tokens, use referrals, and add RUZA to your wallet.
-    </div>
+    <div class="ai-msg" dir="auto">
+  Hi! I can help you claim RUZA tokens, use referrals, and add RUZA to your wallet.
+</div>
+
   </div>
 
   <div id="ruza-chat-input">
@@ -571,6 +582,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 </body>
 </html>
+
 
 
 
