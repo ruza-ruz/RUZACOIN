@@ -53,7 +53,9 @@
   bottom:90px;
   right:20px;
   width:320px;
-  max-height:420px;
+  height:420px;
+  min-height:300px;
+  max-height:85vh;
   background:#0a0433;
   border-radius:14px;
   box-shadow:0 0 20px rgba(0,255,255,0.35);
@@ -61,7 +63,16 @@
   flex-direction:column;
   overflow:hidden;
   z-index:9999;
+  transition:height 0.1s ease;
 }
+
+/* هدر قابل درگ */
+#ruza-chat-header{
+  cursor:ns-resize;
+  user-select:none;
+}
+
+
 
 #ruza-chat-header{
   background:#0f1c3f;
@@ -556,6 +567,38 @@ document.addEventListener("DOMContentLoaded", () => {
   sendBtn.onclick = sendMessage;
   userInput.addEventListener("keypress", e => {
     if (e.key === "Enter") sendMessage();
+
+      // ================= DRAG TO RESIZE HEIGHT =================
+  const chatHeader = document.getElementById("ruza-chat-header");
+  let isDragging = false;
+  let startY = 0;
+  let startHeight = 0;
+
+  chatHeader.addEventListener("mousedown", (e) => {
+    isDragging = true;
+    startY = e.clientY;
+    startHeight = parseInt(window.getComputedStyle(chatBox).height, 10);
+    document.body.style.userSelect = "none";
+  });
+
+  document.addEventListener("mousemove", (e) => {
+    if (!isDragging) return;
+
+    const diff = startY - e.clientY;
+    let newHeight = startHeight + diff;
+
+    if (newHeight < 300) newHeight = 300;
+    if (newHeight > window.innerHeight * 0.85)
+      newHeight = window.innerHeight * 0.85;
+
+    chatBox.style.height = newHeight + "px";
+  });
+
+  document.addEventListener("mouseup", () => {
+    isDragging = false;
+    document.body.style.userSelect = "auto";
+  });
+
   });
 
   async function sendMessage(){
@@ -595,18 +638,13 @@ document.addEventListener("DOMContentLoaded", () => {
   <!-- ================= RUZA AI CHAT ================= -->
 <div id="ruza-chat">
   <div id="ruza-chat-header">
-  <strong>RUZA AI</strong><br>
-  <span class="ruza-subtitle">
-    Official assistant of RUZA Token
-  </span>
-</div>
-
+    RUZA Support
+  </div>
 
   <div id="ruza-chat-messages">
     <div class="ai-msg" dir="auto">
-  Hi! I can help you claim RUZA tokens, use referrals, and add RUZA to your wallet.
-</div>
-
+      Hi! I can help you claim RUZA tokens, use referrals, and add RUZA to your wallet.
+    </div>
   </div>
 
   <div id="ruza-chat-input">
@@ -615,6 +653,7 @@ document.addEventListener("DOMContentLoaded", () => {
   </div>
 </div>
 
+
 <button id="ruza-chat-toggle">
   <img src="assets/logo.png" alt="RUZA AI">
 </button>
@@ -622,6 +661,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 </body>
 </html>
+
 
 
 
