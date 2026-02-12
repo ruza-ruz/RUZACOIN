@@ -122,13 +122,46 @@
   gap:6px;
 }
 
-#ruza-chat-input input{
+#ruza-chat-input{
+  display:flex;
+  align-items:stretch;
+  border-top:1px solid rgba(255,255,255,0.15);
+  background:#0f1c3f;
+  padding:8px;
+  gap:8px;
+}
+
+#ruza-chat-input textarea{
   flex:1;
+  resize:none;
   border:none;
-  padding:10px;
-  font-size:0.9rem;
-  border-radius:8px;
+  padding:12px;
+  font-size:0.95rem;
+  border-radius:10px;
   outline:none;
+  min-height:48px;
+  max-height:120px;
+  overflow-y:auto;
+  line-height:1.4;
+}
+
+#ruza-chat-input button{
+  min-width:70px;
+  border:none;
+  background:#00c3ff;
+  color:#000;
+  font-weight:600;
+  border-radius:10px;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:0 16px;
+  transition:0.2s;
+}
+
+#ruza-chat-input button:hover{
+  background:#00e0ff;
 }
 
 #ruza-chat-input button{
@@ -661,6 +694,7 @@ if (userInput) {
 
 </body>
 </html>
+
 
 
 
