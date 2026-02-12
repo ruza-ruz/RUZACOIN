@@ -545,12 +545,13 @@ document.addEventListener("DOMContentLoaded", () => {
   const chatBox = document.getElementById("ruza-chat");
   const sendBtn = document.getElementById("ruza-send");
   const userInput = document.getElementById("ruza-user-input");
-  input-addEventListener("input",
-                         function(){
-                           this.style.height = "auto";
-                           this.style.height =
-                             this.scrollHeight + "px";
-                         });
+  // Auto resize textarea
+if (userInput) {
+  userInput.addEventListener("input", function () {
+    this.style.height = "auto";
+    this.style.height = this.scrollHeight + "px";
+  });
+}
   const messagesBox = document.getElementById("ruza-chat-messages");
 
   if (!chatToggle || !chatBox) {
@@ -645,7 +646,7 @@ document.addEventListener("DOMContentLoaded", () => {
   </div>
 
   <div id="ruza-chat-input">
-    <textarea id="ruza-input"
+   <textarea id="ruza-user-input"
       placeholder="Type your message..."
       rows="1"></textarea>
     <button id="ruza-send">Send</button>
@@ -660,6 +661,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 </body>
 </html>
+
 
 
 
