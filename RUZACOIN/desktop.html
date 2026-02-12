@@ -545,6 +545,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const chatBox = document.getElementById("ruza-chat");
   const sendBtn = document.getElementById("ruza-send");
   const userInput = document.getElementById("ruza-user-input");
+  input-addEventListener("input",
+                         function(){
+                           this.style.height = "auto";
+                           this.style.height =
+                             this.scrollHeight + "px";
+                         });
   const messagesBox = document.getElementById("ruza-chat-messages");
 
   if (!chatToggle || !chatBox) {
@@ -625,7 +631,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-
 </script>
   <!-- ================= RUZA AI CHAT ================= -->
 <div id="ruza-chat">
@@ -640,7 +645,9 @@ document.addEventListener("DOMContentLoaded", () => {
   </div>
 
   <div id="ruza-chat-input">
-    <input type="text" id="ruza-user-input" placeholder="Ask about RUZA..." />
+    <textarea id="ruza-input"
+      placeholder="Type your message..."
+      rows="1"></textarea>
     <button id="ruza-send">Send</button>
   </div>
 </div>
@@ -653,6 +660,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 </body>
 </html>
+
 
 
 
