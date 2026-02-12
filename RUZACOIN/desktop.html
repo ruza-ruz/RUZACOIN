@@ -106,12 +106,18 @@
   margin-bottom:8px;
   text-align:right;
 }
-    .ai-msg,
+
+#ruza-chat-messages{
+  direction: rtl;
+}
+
+.ai-msg,
 .user-msg{
   unicode-bidi: plaintext;
-  direction: rtl;
-  text-align: right;
+  direction: auto;
+  text-align: start;
 }
+    
 
 
 #ruza-chat-input{
@@ -694,6 +700,7 @@ if (userInput) {
 
 </body>
 </html>
+
 
 
 
