@@ -472,7 +472,6 @@ footer a img{width:20px;height:20px;object-fit:contain}
 
 
   /* CORRECT API (PAIR) */
-  const dexPairUrl = "https://api.dexscreener.com/latest/dex/tokens/0x2ec86e1b869cb251fe9441f02c01761543e6cbbd";
 
   function isValidAddr(a){ return typeof a === "string" && /^0x[a-fA-F0-9]{40}$/.test(a.trim()); }
 
@@ -499,12 +498,16 @@ async function loadPrice() {
   const priceEl = document.getElementById("live-price");
 
   try {
-    const res = await fetch(dexPairUrl);
+    // ---------- LIVE PRICE FROM BACKEND ----------
+async function loadPrice() {
+  const priceEl = document.getElementById("live-price");
+
+  try {
+    const res = await fetch(apiBase + "/api/liveprice");
     const data = await res.json();
 
-    if (data.pairs && data.pairs.length > 0) {
-      const price = Number(data.pairs[0].priceUsd).toFixed(6);
-      priceEl.textContent = `$${price}`;
+    if (data.price) {
+      priceEl.textContent = "$" + Number(data.price).toFixed(6);
     } else {
       priceEl.textContent = "Unavailable";
     }
@@ -516,6 +519,7 @@ async function loadPrice() {
 
 loadPrice();
 setInterval(loadPrice, 30000);
+
 
 
   (function applyUrlRef(){
@@ -697,6 +701,7 @@ if (userInput) {
 
 </body>
 </html>
+
 
 
 
