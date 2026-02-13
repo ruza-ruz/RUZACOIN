@@ -494,34 +494,28 @@ footer a img{width:20px;height:20px;object-fit:contain}
 
 
 // ---------- PRICE VIA REPLIT PROXY (CORS FIX) ----------
-// ---------- REAL PRICE FROM DEX PAGE (WORKS 100%) ----------
-async function loadPriceFromDexPage() {
+// ---------- LIVE PRICE FROM DEXSCREENER API ----------
+async function loadPrice() {
   const priceEl = document.getElementById("live-price");
 
   try {
-    const res = await fetch(
-      "https://corsproxy.io/?https://dexscreener.com/bsc/0x2ec86e1b869cb251fe9441f02c01761543e6cbbd"
-    );
-    const html = await res.text();
+    const res = await fetch(dexPairUrl);
+    const data = await res.json();
 
-    // Extract "priceUsd"
-    const match = html.match(/"priceUsd":"([\d.]+)"/);
-
-    if (match && match[1]) {
-      const price = Number(match[1]).toFixed(5);
+    if (data.pairs && data.pairs.length > 0) {
+      const price = Number(data.pairs[0].priceUsd).toFixed(6);
       priceEl.textContent = `$${price}`;
     } else {
       priceEl.textContent = "Unavailable";
     }
 
-  } catch (e) {
+  } catch (err) {
     priceEl.textContent = "Unavailable";
   }
 }
 
-loadPriceFromDexPage();
-setInterval(loadPriceFromDexPage, 30000);
-
+loadPrice();
+setInterval(loadPrice, 30000);
 
 
   (function applyUrlRef(){
@@ -703,6 +697,7 @@ if (userInput) {
 
 </body>
 </html>
+
 
 
 
