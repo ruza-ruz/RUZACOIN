@@ -499,7 +499,7 @@ async function loadPrice() {
   const priceEl = document.getElementById("live-price");
 
   try {
-    const res = await fetch(dexPairUrl);
+    const res = await fetch("https://api.dexscreener.com/latest/dex/tokens/0x2ec86e1b869cb251fe9441f02c01761543e6cbbd");
     const data = await res.json();
 
     if (data.pairs && data.pairs.length > 0) {
@@ -697,6 +697,7 @@ if (userInput) {
 
 </body>
 </html>
+
 
 
 
