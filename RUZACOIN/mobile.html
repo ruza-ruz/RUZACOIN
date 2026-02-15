@@ -56,6 +56,30 @@ html, body {
   background: rgba(255,255,255,0.05) !important;
   color:#fff;
 }
+    #ruza-chat-header{
+  font-weight:600;
+  letter-spacing:0.5px;
+}
+
+
+    /* auto direction input */
+#ruza-chat-input textarea{
+  direction: auto;
+  text-align: left;
+}
+
+/* وقتی فارسیه */
+.rtl{
+  direction: rtl !important;
+  text-align: right !important;
+}
+
+/* وقتی انگلیسیه */
+.ltr{
+  direction: ltr !important;
+  text-align: left !important;
+}
+
 
 
     .container{
@@ -584,6 +608,19 @@ document.addEventListener("DOMContentLoaded", ()=>{
   sendBtn.onclick = sendMessage;
 
   input.addEventListener("keypress", e=>{
+    input.addEventListener("input", ()=>{
+  const val = input.value;
+
+  // اگر فارسی داشت
+  if(/[\u0600-\u06FF]/.test(val)){
+    input.classList.add("rtl");
+    input.classList.remove("ltr");
+  }else{
+    input.classList.add("ltr");
+    input.classList.remove("rtl");
+  }
+});
+
     if(e.key === "Enter"){
       e.preventDefault();
       sendMessage();
@@ -600,7 +637,11 @@ async function sendMessage(){
   const text = input.value.trim();
   if(!text) return;
 
-  messages.innerHTML += `<div class="user-msg">${text}</div>`;
+  const isRTL = /[\u0600-\u06FF]/.test(text);
+const dirClass = isRTL ? "rtl" : "ltr";
+
+messages.innerHTML += `<div class="user-msg ${dirClass}">${text}</div>`;
+
   input.value = "";
 
   try{
@@ -612,7 +653,12 @@ async function sendMessage(){
 
     const data = await res.json();
 
-    messages.innerHTML += `<div class="ai-msg">${data.reply || "No response"}</div>`;
+    const reply = data.reply || "No response";
+const isRTL2 = /[\u0600-\u06FF]/.test(reply);
+const dirClass2 = isRTL2 ? "rtl" : "ltr";
+
+messages.innerHTML += `<div class="ai-msg ${dirClass2}">${reply}</div>`;
+
     messages.scrollTop = messages.scrollHeight;
 
   }catch{
@@ -625,7 +671,9 @@ async function sendMessage(){
 
   <!-- RUZA CHAT MOBILE -->
 <div id="ruza-chat">
-  <div id="ruza-chat-header">RUZA Support</div>
+  <div id="ruza-chat-header">
+  🤖 RUZA AI Assistant • Online
+</div>
 
   <div id="ruza-chat-messages">
     <div class="ai-msg">
@@ -646,6 +694,7 @@ async function sendMessage(){
 
 </body>
 </html>
+
 
 
 
