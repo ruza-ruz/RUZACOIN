@@ -18,7 +18,6 @@
     #ruza-chat-input textarea::placeholder{
   color:#ccc;
 }
-<textarea id="ruza-user-input" placeholder="Type your message..."></textarea>
 
 
     html,body{
@@ -60,13 +59,21 @@ html, body {
   font-weight:600;
   letter-spacing:0.5px;
 }
-
-
-    /* auto direction input */
 #ruza-chat-input textarea{
-  direction: auto;
-  text-align: left;
+  flex:1;
+  border:none;
+  border-radius:10px;
+  padding:10px;
+  resize:none;
+  font-size:0.95rem;
+  min-height:42px;
+  max-height:90px;
+  outline:none;
+
+  direction: rtl;       /* پیش‌فرض فارسی */
+  text-align: right;
 }
+
 
 /* وقتی فارسیه */
 .rtl{
@@ -268,7 +275,6 @@ button{
   padding:10px;
   overflow-y:auto;
   font-size:0.9rem;
-  direction:rtl;
 }
 
 .ai-msg{
@@ -607,25 +613,27 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
   sendBtn.onclick = sendMessage;
 
-  input.addEventListener("keypress", e=>{
-    input.addEventListener("input", ()=>{
+  // تشخیص زبان لحظه‌ای
+input.addEventListener("input", ()=>{
   const val = input.value;
 
-  // اگر فارسی داشت
   if(/[\u0600-\u06FF]/.test(val)){
-    input.classList.add("rtl");
-    input.classList.remove("ltr");
+    input.style.direction = "rtl";
+    input.style.textAlign = "right";
   }else{
-    input.classList.add("ltr");
-    input.classList.remove("rtl");
+    input.style.direction = "ltr";
+    input.style.textAlign = "left";
   }
 });
 
-    if(e.key === "Enter"){
-      e.preventDefault();
-      sendMessage();
-    }
-  });
+// ارسال پیام با Enter
+input.addEventListener("keypress", e=>{
+  if(e.key === "Enter"){
+    e.preventDefault();
+    sendMessage();
+  }
+});
+
 
 });
 
@@ -682,7 +690,7 @@ messages.innerHTML += `<div class="ai-msg ${dirClass2}">${reply}</div>`;
   </div>
 
   <div id="ruza-chat-input">
-    <textarea id="ruza-user-input" rows="1"></textarea>
+    <textarea id="ruza-user-input" rows="1" placeholder="Type your message..."></textarea>
     <button id="ruza-send">Send</button>
   </div>
 </div>
@@ -694,6 +702,7 @@ messages.innerHTML += `<div class="ai-msg ${dirClass2}">${reply}</div>`;
 
 </body>
 </html>
+
 
 
 
