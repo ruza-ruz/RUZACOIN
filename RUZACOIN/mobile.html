@@ -37,6 +37,26 @@
 .price-card a:hover{
   color:#ffffff;
 }
+    body, .container, header, section, footer {
+  text-align: center;
+}
+
+.section-box {
+  text-align: center;
+}
+
+input {
+  text-align: center;
+}
+html, body {
+  background: linear-gradient(180deg,#020010 0%,#0a0433 70%,#000 100%) !important;
+  color:#fff !important;
+}
+.section-box, .price-card, .price-wrapper {
+  background: rgba(255,255,255,0.05) !important;
+  color:#fff;
+}
+
 
     .container{
       max-width:480px;
@@ -546,13 +566,16 @@ setInterval(loadPrice,30000);
 
 
 /* ===== CHAT ===== */
+let input, messages;
+
 document.addEventListener("DOMContentLoaded", ()=>{
 
   const toggle = document.getElementById("ruza-chat-toggle");
   const box = document.getElementById("ruza-chat");
   const sendBtn = document.getElementById("ruza-send");
-  const input = document.getElementById("ruza-user-input");
-  const messages = document.getElementById("ruza-chat-messages");
+
+  input = document.getElementById("ruza-user-input");
+  messages = document.getElementById("ruza-chat-messages");
 
   toggle.onclick = () => {
     box.style.display = box.style.display === "flex" ? "none" : "flex";
@@ -560,17 +583,20 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
   sendBtn.onclick = sendMessage;
 
+  input.addEventListener("keypress", e=>{
+    if(e.key === "Enter"){
+      e.preventDefault();
+      sendMessage();
+    }
+  });
+
 });
 
-
-input.addEventListener("keypress", e=>{
-  if(e.key === "Enter"){
-    e.preventDefault();
-    sendMessage();
-  }
-});
 
 async function sendMessage(){
+
+  if(!input || !messages) return;
+
   const text = input.value.trim();
   if(!text) return;
 
@@ -586,13 +612,14 @@ async function sendMessage(){
 
     const data = await res.json();
 
-    messages.innerHTML += `<div class="ai-msg">${data.reply}</div>`;
+    messages.innerHTML += `<div class="ai-msg">${data.reply || "No response"}</div>`;
     messages.scrollTop = messages.scrollHeight;
 
   }catch{
-    messages.innerHTML += `<div class="ai-msg">Error</div>`;
+    messages.innerHTML += `<div class="ai-msg">Server error</div>`;
   }
 }
+
 
 </script>
 
@@ -619,6 +646,7 @@ async function sendMessage(){
 
 </body>
 </html>
+
 
 
 
