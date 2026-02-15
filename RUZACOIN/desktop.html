@@ -46,7 +46,12 @@
   opacity:1;
 }
 
-
+    .price-note{
+  margin-top:6px;
+  font-size:0.85rem;
+  color:#bfefff;
+  opacity:0.85;
+}
 
 #ruza-chat{
   position:fixed;
@@ -381,16 +386,24 @@ footer a img{width:20px;height:20px;object-fit:contain}
 
 <div class="live-row">
   <div class="price-card">
-    <div><strong>LIVE PRICE</strong></div>
-    <div class="price-spot" id="live-price">Loading...</div>
+  <div><strong>LIVE PRICE</strong></div>
 
-    <div class="price-source" style="margin-top:12px; border-top:1px solid rgba(255,255,255,0.15); padding-top:10px;">
+  <div class="price-spot" id="live-price">Loading...</div>
 
-      <a href="https://dexscreener.com/bsc/0x2ec86e1b869cb251fe9441f02c01761543e6cbbd" target="_blank">
-        View Live Chart on DexScreener
-      </a>
-    </div>
+  <!-- NEW TEXT -->
+  <div class="price-note">
+    Real-time on-chain price (liquidity pool)
   </div>
+
+  <div class="price-source" style="margin-top:12px; border-top:1px solid rgba(255,255,255,0.15); padding-top:10px;">
+
+    <a href="https://dexscreener.com/bsc/0x2ec86e1b869cb251fe9441f02c01761543e6cbbd" target="_blank">
+      View Live Chart on DexScreener
+    </a>
+
+  </div>
+</div>
+
 </div>
 
 
@@ -700,6 +713,7 @@ if (userInput) {
 
 </body>
 </html>
+
 
 
 
