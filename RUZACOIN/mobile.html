@@ -15,6 +15,11 @@
       --action:#009dff;
       --yellow:#ffcc00;
     }
+    #ruza-chat-input textarea::placeholder{
+  color:#ccc;
+}
+<textarea id="ruza-user-input" placeholder="Type your message..."></textarea>
+
 
     html,body{
       margin:0;padding:0;
@@ -239,25 +244,36 @@ button{
 
 #ruza-chat-input{
   display:flex;
-  padding:6px;
+  padding:10px;
   background:#0f1c3f;
-  gap:6px;
+  gap:8px;
+  align-items:center;
 }
 
+/* textarea حرفه‌ای */
 #ruza-chat-input textarea{
   flex:1;
   border:none;
-  border-radius:8px;
-  padding:6px;
+  border-radius:10px;
+  padding:10px;
   resize:none;
+  font-size:0.95rem;
+  min-height:42px;   /* مهم */
+  max-height:90px;
+  outline:none;
 }
 
+/* دکمه send */
 #ruza-chat-input button{
-  background:#00c3ff;
-  border:none;
-  border-radius:8px;
-  padding:0 12px;
+  width:auto !important;   /* جلوگیری از 100% شدن */
+  min-width:70px;
+  height:44px;            /* دو برابر قبلی */
+  padding:0 14px;
   font-weight:600;
+  border-radius:10px;
+  background:#00c3ff;
+  color:#fff;
+  cursor:pointer;
 }
 
 
@@ -544,37 +560,6 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
   sendBtn.onclick = sendMessage;
 
-  input.addEventListener("keypress", e=>{
-    if(e.key === "Enter"){
-      e.preventDefault();
-      sendMessage();
-    }
-  });
-
-  async function sendMessage(){
-    const text = input.value.trim();
-    if(!text) return;
-
-    messages.innerHTML += `<div class="user-msg">${text}</div>`;
-    input.value = "";
-
-    try{
-      const res = await fetch(apiBase + "/api/chat",{
-        method:"POST",
-        headers:{ "Content-Type":"application/json" },
-        body: JSON.stringify({ message:text })
-      });
-
-      const data = await res.json();
-
-      messages.innerHTML += `<div class="ai-msg">${data.reply}</div>`;
-      messages.scrollTop = messages.scrollHeight;
-
-    }catch{
-      messages.innerHTML += `<div class="ai-msg">Error</div>`;
-    }
-  }
-
 });
 
 
@@ -634,6 +619,7 @@ async function sendMessage(){
 
 </body>
 </html>
+
 
 
 
