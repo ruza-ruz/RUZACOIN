@@ -498,15 +498,10 @@ async function loadPrice() {
   const priceEl = document.getElementById("live-price");
 
   try {
-    // ---------- LIVE PRICE FROM BACKEND ----------
-async function loadPrice() {
-  const priceEl = document.getElementById("live-price");
-
-  try {
     const res = await fetch(apiBase + "/api/liveprice");
     const data = await res.json();
 
-    if (data.price) {
+    if (res.ok && data.price) {
       priceEl.textContent = "$" + Number(data.price).toFixed(6);
     } else {
       priceEl.textContent = "Unavailable";
@@ -519,6 +514,7 @@ async function loadPrice() {
 
 loadPrice();
 setInterval(loadPrice, 30000);
+
 
 
 
@@ -599,10 +595,13 @@ if (userInput) {
     return;
   }
 
-  chatToggle.onclick = () => {
-    chatBox.style.display =
-      chatBox.style.display === "flex" ? "none" : "flex";
-  };
+  chatToggle.addEventListener("click", () => {
+  if (getComputedStyle(chatBox).display === "none") {
+    chatBox.style.display = "flex";
+  } else {
+    chatBox.style.display = "none";
+  }
+});
 
   sendBtn.onclick = sendMessage;
   userInput.addEventListener("keypress", e => {
@@ -701,6 +700,7 @@ if (userInput) {
 
 </body>
 </html>
+
 
 
 
