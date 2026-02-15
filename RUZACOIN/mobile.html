@@ -160,6 +160,99 @@ button{
     footer img{
       width:20px;height:20px;object-fit:contain
     }
+    /* ================= RUZA CHAT MOBILE ================= */
+
+#ruza-chat-toggle{
+  position:fixed;
+  bottom:18px;
+  right:16px;
+  width:55px;
+  height:55px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#0a0433,#111a40);
+  border:1px solid rgba(0,255,255,0.3);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:9999;
+  box-shadow:0 0 12px rgba(0,255,255,0.3);
+}
+
+#ruza-chat-toggle img{
+  width:26px;
+}
+
+#ruza-chat{
+  position:fixed;
+  bottom:80px;
+  right:10px;
+  left:10px;
+  height:60vh;
+  background:#0a0433;
+  border-radius:14px;
+  display:none;
+  flex-direction:column;
+  overflow:hidden;
+  z-index:9999;
+  box-shadow:0 0 20px rgba(0,255,255,0.3);
+}
+
+#ruza-chat-header{
+  background:#0f1c3f;
+  color:#00ffff;
+  padding:10px;
+  text-align:center;
+  font-size:0.9rem;
+}
+
+#ruza-chat-messages{
+  flex:1;
+  padding:10px;
+  overflow-y:auto;
+  font-size:0.9rem;
+  direction:rtl;
+}
+
+.ai-msg{
+  background:rgba(255,255,255,0.08);
+  padding:8px;
+  border-radius:8px;
+  margin-bottom:8px;
+}
+
+.user-msg{
+  background:#009dff;
+  padding:8px;
+  border-radius:8px;
+  margin-bottom:8px;
+  text-align:right;
+}
+
+#ruza-chat-input{
+  display:flex;
+  padding:6px;
+  background:#0f1c3f;
+  gap:6px;
+}
+
+#ruza-chat-input textarea{
+  flex:1;
+  border:none;
+  border-radius:8px;
+  padding:6px;
+  resize:none;
+}
+
+#ruza-chat-input button{
+  background:#00c3ff;
+  border:none;
+  border-radius:8px;
+  padding:0 12px;
+  font-weight:600;
+}
+
+
+    
   </style>
 </head>
 <body>
@@ -184,24 +277,24 @@ button{
   max-width:360px;
 ">
 
-  <div class="live-row" style="margin:0;">
-    <div class="price-card" style="background:transparent;border:none;box-shadow:none"
-         id="pairInfo">RUZA (RUZ)</div>
+  <div class="live-row">
+  <div class="price-card">
+    <div><strong>LIVE PRICE</strong></div>
 
-    <div class="price-card price-spot" style="background:transparent;border:none;box-shadow:none"
-         id="livePrice">Loading...</div>
+    <div class="price-spot" id="livePrice">Loading...</div>
 
-    <div class="price-card small" style="background:transparent;border:none;box-shadow:none"
-         id="priceChange"></div>
+    <div class="small" style="margin-top:6px;">
+      Real-time on-chain price
+    </div>
+
+    <div style="margin-top:10px;">
+      <a href="https://dexscreener.com/bsc/0x2ec86e1b869cb251fe9441f02c01761543e6cbbd" target="_blank">
+        View Live Chart on DexScreener
+      </a>
+    </div>
   </div>
+</div>
 
-  <div style="margin-top:12px;">
-    <a href="https://dexscreener.com/bsc/0x2ec86e1b869cb251fe9441f02c01761543e6cbbd"
-       target="_blank"
-       style="color:#00f3ff;font-weight:600;font-size:0.9rem;text-decoration:underline;">
-       View Live Chart on DexScreener
-    </a>
-  </div>
 
 </div>
 
@@ -437,10 +530,102 @@ button{
       msg.textContent = "Referral link copied!";
     });
   });
+
+  const apiBase = "https://ruza-backend.onrender.com";
+
+/* ===== LOAD PRICE (مثل دسکتاپ) ===== */
+async function loadPrice(){
+  const el = document.getElementById("livePrice");
+
+  try{
+    const res = await fetch(apiBase + "/api/liveprice");
+    const data = await res.json();
+
+    if(res.ok && data.price){
+      el.textContent = "$" + Number(data.price).toFixed(6);
+    }else{
+      el.textContent = "Unavailable";
+    }
+
+  }catch{
+    el.textContent = "Unavailable";
+  }
+}
+
+loadPrice();
+setInterval(loadPrice,30000);
+
+
+/* ===== CHAT ===== */
+const toggle = document.getElementById("ruza-chat-toggle");
+const box = document.getElementById("ruza-chat");
+const sendBtn = document.getElementById("ruza-send");
+const input = document.getElementById("ruza-user-input");
+const messages = document.getElementById("ruza-chat-messages");
+
+toggle.onclick = () => {
+  box.style.display = box.style.display === "flex" ? "none" : "flex";
+};
+
+sendBtn.onclick = sendMessage;
+
+input.addEventListener("keypress", e=>{
+  if(e.key === "Enter"){
+    e.preventDefault();
+    sendMessage();
+  }
+});
+
+async function sendMessage(){
+  const text = input.value.trim();
+  if(!text) return;
+
+  messages.innerHTML += `<div class="user-msg">${text}</div>`;
+  input.value = "";
+
+  try{
+    const res = await fetch(apiBase + "/api/chat",{
+      method:"POST",
+      headers:{ "Content-Type":"application/json" },
+      body: JSON.stringify({ message:text })
+    });
+
+    const data = await res.json();
+
+    messages.innerHTML += `<div class="ai-msg">${data.reply}</div>`;
+    messages.scrollTop = messages.scrollHeight;
+
+  }catch{
+    messages.innerHTML += `<div class="ai-msg">Error</div>`;
+  }
+}
+
 </script>
+
+  <!-- RUZA CHAT MOBILE -->
+<div id="ruza-chat">
+  <div id="ruza-chat-header">RUZA Support</div>
+
+  <div id="ruza-chat-messages">
+    <div class="ai-msg">
+      Hi! I can help you with RUZA.
+    </div>
+  </div>
+
+  <div id="ruza-chat-input">
+    <textarea id="ruza-user-input" rows="1"></textarea>
+    <button id="ruza-send">Send</button>
+  </div>
+</div>
+
+<button id="ruza-chat-toggle">
+  <img src="assets/logo.png">
+</button>
+
 
 </body>
 </html>
+
 
 
 
