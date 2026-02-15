@@ -23,6 +23,15 @@
       font-family:"Poppins",Arial,sans-serif;
       text-align:center;
     }
+    .price-card a{
+  color:#00ffff;
+  font-weight:600;
+  text-decoration:none;
+}
+
+.price-card a:hover{
+  color:#ffffff;
+}
 
     .container{
       max-width:480px;
@@ -284,7 +293,7 @@ button{
     <div class="price-spot" id="livePrice">Loading...</div>
 
     <div class="small" style="margin-top:6px;">
-      Real-time on-chain price
+      Real-time on-chain price (liquidity pool)
     </div>
 
     <div style="margin-top:10px;">
@@ -416,7 +425,6 @@ button{
 <script>
   const apiBase = "https://ruza-backend.onrender.com";
 
-  const dexTokenUrl = "https://api.dexscreener.com/latest/dex/tokens/0x2ec86e1b869cb251fe9441f02c01761543e6cbbd";
 
   function isValidAddr(a){ return /^0x[a-fA-F0-9]{40}$/.test(a?.trim()); }
 
@@ -433,41 +441,7 @@ button{
   }
   loadStats();
 
-  /* ---- PRICE (exact Dex format) ---- */
-  async function loadPrice(){
-    const priceEl = document.getElementById("livePrice");
-    const changeEl = document.getElementById("priceChange");
-    const pairEl = document.getElementById("pairInfo");
-
-    try{
-      const res = await fetch(dexTokenUrl);
-      const data = await res.json();
-
-      if(!data?.pairs?.length){
-        priceEl.textContent = "Price unavailable";
-        return;
-      }
-
-      const p = data.pairs[0];
-
-      /* price EXACTLY like DexScreener */
-      const priceRaw = p.priceUsd || p.price || "0";
-      const formattedPrice = Number(priceRaw).toString(); // حذف صفرهای اضافی
-
-      priceEl.textContent = "$" + formattedPrice;
-
-      
-      
-
-      pairEl.textContent = "LIVE PRICE";
-
-    }catch(e){
-      priceEl.textContent = "Price unavailable";
-    }
-  }
-
-  loadPrice();
-  setInterval(loadPrice, 30000);
+  
 
   /* ---- APPLY REF ---- */
   (()=>{  
@@ -531,7 +505,6 @@ button{
     });
   });
 
-  const apiBase = "https://ruza-backend.onrender.com";
 
 /* ===== LOAD PRICE (مثل دسکتاپ) ===== */
 async function loadPrice(){
@@ -557,17 +530,53 @@ setInterval(loadPrice,30000);
 
 
 /* ===== CHAT ===== */
-const toggle = document.getElementById("ruza-chat-toggle");
-const box = document.getElementById("ruza-chat");
-const sendBtn = document.getElementById("ruza-send");
-const input = document.getElementById("ruza-user-input");
-const messages = document.getElementById("ruza-chat-messages");
+document.addEventListener("DOMContentLoaded", ()=>{
 
-toggle.onclick = () => {
-  box.style.display = box.style.display === "flex" ? "none" : "flex";
-};
+  const toggle = document.getElementById("ruza-chat-toggle");
+  const box = document.getElementById("ruza-chat");
+  const sendBtn = document.getElementById("ruza-send");
+  const input = document.getElementById("ruza-user-input");
+  const messages = document.getElementById("ruza-chat-messages");
 
-sendBtn.onclick = sendMessage;
+  toggle.onclick = () => {
+    box.style.display = box.style.display === "flex" ? "none" : "flex";
+  };
+
+  sendBtn.onclick = sendMessage;
+
+  input.addEventListener("keypress", e=>{
+    if(e.key === "Enter"){
+      e.preventDefault();
+      sendMessage();
+    }
+  });
+
+  async function sendMessage(){
+    const text = input.value.trim();
+    if(!text) return;
+
+    messages.innerHTML += `<div class="user-msg">${text}</div>`;
+    input.value = "";
+
+    try{
+      const res = await fetch(apiBase + "/api/chat",{
+        method:"POST",
+        headers:{ "Content-Type":"application/json" },
+        body: JSON.stringify({ message:text })
+      });
+
+      const data = await res.json();
+
+      messages.innerHTML += `<div class="ai-msg">${data.reply}</div>`;
+      messages.scrollTop = messages.scrollHeight;
+
+    }catch{
+      messages.innerHTML += `<div class="ai-msg">Error</div>`;
+    }
+  }
+
+});
+
 
 input.addEventListener("keypress", e=>{
   if(e.key === "Enter"){
@@ -625,6 +634,7 @@ async function sendMessage(){
 
 </body>
 </html>
+
 
 
 
