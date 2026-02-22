@@ -116,11 +116,28 @@
   direction: rtl;
 }
 
-.ai-msg,
+/* پیام کاربر */
 .user-msg{
-  unicode-bidi: plaintext;
-  direction: auto;
-  text-align: start;
+  background:#009dff;
+  padding:8px;
+  border-radius:8px;
+  margin-bottom:8px;
+
+  direction: rtl;
+  text-align: right;
+  unicode-bidi: embed;
+}
+
+/* پیام AI */
+.ai-msg{
+  background:rgba(255,255,255,0.08);
+  padding:8px;
+  border-radius:8px;
+  margin-bottom:8px;
+
+  direction: rtl;
+  text-align: right;
+  unicode-bidi: embed;
 }
     
 
@@ -662,7 +679,7 @@ if (userInput) {
     if(!text) return;
 
     messagesBox.innerHTML +=
-  `<div class="user-msg" dir="auto">${text}</div>`;
+  `<div class="ai-msg">${data.reply}</div>`
 
     userInput.value = "";
     messagesBox.scrollTop = messagesBox.scrollHeight;
@@ -681,7 +698,7 @@ if (userInput) {
       const data = await res.json();
 
       messagesBox.innerHTML +=
-  `<div class="ai-msg" dir="auto">${data.reply || "No response."}</div>`;
+  `<div class="user-msg">${text}</div>`
 
       messagesBox.scrollTop = messagesBox.scrollHeight;
 
@@ -721,6 +738,7 @@ if (userInput) {
 
 </body>
 </html>
+
 
 
 
