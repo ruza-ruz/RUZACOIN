@@ -171,9 +171,9 @@
   max-height:120px;
   overflow-y:auto;
   line-height:1.4;
-  direction:auto;
-  unicode-bidi:plaintext;
-  text-align:start;
+  direction: rtl;
+  unicode-bidi: embed;
+  text-align: right;
 }
 
 #ruza-chat-input button{
@@ -639,9 +639,12 @@ if (userInput) {
 });
 
   sendBtn.onclick = sendMessage;
-  userInput.addEventListener("keypress", e => {
-    if (e.key === "Enter") sendMessage();
-  });
+  userInput.addEventListener("keydown", e => {
+  if (e.key === "Enter" && !e.shiftKey) {
+    e.preventDefault();
+    sendMessage();
+  }
+});
 
    // ================= DRAG TO RESIZE HEIGHT =================
   const chatHeader = document.getElementById("ruza-chat-header");
@@ -674,39 +677,46 @@ if (userInput) {
     document.body.style.userSelect = "auto";
   });
 
+  function formatMessage(text) {
+  return text.replace(
+    /(CLAIM|REFERRAL|RUZA|BNB|PancakeSwap)/g,
+    '<span dir="ltr" style="unicode-bidi:embed;">$1</span>'
+  );
+}
   async function sendMessage(){
-    const text = userInput.value.trim();
-    if(!text) return;
+  const text = userInput.value.trim();
+  if(!text) return;
 
+  // نمایش پیام کاربر
+  messagesBox.innerHTML +=
+    `<div class="user-msg">${formatMessage(text)}</div>`;
+
+  userInput.value = "";
+  messagesBox.scrollTop = messagesBox.scrollHeight;
+
+  try{
+    const res = await fetch(`${apiBase}/api/chat`, {
+      method:"POST",
+      headers:{ "Content-Type":"application/json" },
+      body: JSON.stringify({
+        message: text,
+        userId: localStorage.getItem("uid")
+      })
+    });
+
+    const data = await res.json();
+
+    // نمایش جواب AI
     messagesBox.innerHTML +=
-  `<div class="ai-msg">${data.reply}</div>`
+      `<div class="ai-msg">${formatMessage(data.reply)}</div>`;
 
-    userInput.value = "";
     messagesBox.scrollTop = messagesBox.scrollHeight;
 
-    try{
-      const res = await fetch(`${apiBase}/api/chat`, {
-
-
-        method:"POST",
-        headers:{ "Content-Type":"application/json" },
-        body: JSON.stringify({
-  message: text,
-  userId: localStorage.getItem("uid")
-})
-      });
-      const data = await res.json();
-
-      messagesBox.innerHTML +=
-  `<div class="user-msg">${text}</div>`
-
-      messagesBox.scrollTop = messagesBox.scrollHeight;
-
-    } catch(err){
-      messagesBox.innerHTML +=
-        `<div class="ai-msg">Server connection error.</div>`;
-    }
+  } catch(err){
+    messagesBox.innerHTML +=
+      `<div class="ai-msg">Server connection error.</div>`;
   }
+}
 });
 
 </script>
@@ -717,7 +727,7 @@ if (userInput) {
   </div>
 
   <div id="ruza-chat-messages">
-    <div class="ai-msg" dir="auto">
+<div class="ai-msg">
       Hi! I can help you claim RUZA tokens, use referrals, and add RUZA to your wallet.
     </div>
   </div>
@@ -738,6 +748,7 @@ if (userInput) {
 
 </body>
 </html>
+
 
 
 
