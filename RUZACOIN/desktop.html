@@ -504,6 +504,11 @@ footer a img{width:20px;height:20px;object-fit:contain}
   }
   loadStats();
 
+  // ساخت شناسه یکتا برای هر کاربر
+if (!localStorage.getItem("uid")) {
+  localStorage.setItem("uid", Date.now().toString());
+}
+
 
 // ---------- PRICE VIA REPLIT PROXY (CORS FIX) ----------
 // ---------- LIVE PRICE FROM DEXSCREENER API ----------
@@ -668,7 +673,10 @@ if (userInput) {
 
         method:"POST",
         headers:{ "Content-Type":"application/json" },
-        body: JSON.stringify({ message: text })
+        body: JSON.stringify({
+  message: text,
+  userId: localStorage.getItem("uid")
+})
       });
       const data = await res.json();
 
@@ -713,6 +721,7 @@ if (userInput) {
 
 </body>
 </html>
+
 
 
 
