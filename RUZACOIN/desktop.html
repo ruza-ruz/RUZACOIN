@@ -493,26 +493,34 @@ footer a img{width:20px;height:20px;object-fit:contain}
     </a>
   </div>
 
-  <div class="contract-box">
-  <p style="color:#bfefff;font-size:0.9rem;margin-top:10px;">
-    Contract Address:
-  </p>
+  <div class="pancake">
+  <a href="https://pancakeswap.finance/swap?outputCurrency=0x2ec86e1b869cb251fe9441f02c01761543e6cbbd" target="_blank" rel="noopener">
+    <img src="assets/pancake.png" alt="PancakeSwap" /> Trade RUZA on PancakeSwap
+  </a>
 
-  <div class="contract-row">
-    <span id="contract-address">
-      0x2Ec86E1B869cB251fE9441F02c01761543E6cbbD
-    </span>
-    <button onclick="copyContract()">Copy</button>
+  <!-- CONTRACT ADDRESS -->
+  <div class="contract-box">
+    <p style="color:#bfefff;font-size:0.9rem;margin-top:10px;">
+      Contract Address:
+    </p>
+
+    <div class="contract-row">
+      <span id="contract-address">
+        0x2Ec86E1B869cB251fE9441F02c01761543E6cbbD
+      </span>
+      <button onclick="copyContract()">Copy</button>
+    </div>
   </div>
-</div>
 
   <p style="font-size:0.8rem;color:#aaa;margin-top:6px;">
-  Always verify the contract address before swapping
-</p>
+    Always verify the contract address before swapping
+  </p>
 
   <p style="font-size:0.9rem;color:#ffcc00;margin-top:8px;">
-  You can use this contract on PancakeSwap
-</p>
+    You can use this contract on PancakeSwap
+  </p>
+
+</div>
 
   <section class="section-box chart">
     <h2>📊 Live Chart</h2>
@@ -558,7 +566,7 @@ footer a img{width:20px;height:20px;object-fit:contain}
   const text = document.getElementById("contract-address").innerText;
   navigator.clipboard.writeText(text);
 
-  alert("Contract copied!");
+   alert("Contract copied! You can paste it in PancakeSwap.");
 }
 
 
@@ -809,6 +817,7 @@ if (userInput) {
 
 </body>
 </html>
+
 
 
 
