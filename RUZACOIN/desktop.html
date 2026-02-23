@@ -24,6 +24,37 @@
   box-shadow:0 0 15px rgba(0,255,255,0.25);
 }
 
+    .contract-box{
+  margin-top:14px;
+  text-align:center;
+}
+
+.contract-row{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+#contract-address{
+  background:#111;
+  padding:6px 10px;
+  border-radius:6px;
+  font-size:0.85rem;
+  color:#00ffff;
+  word-break:break-all;
+}
+
+.contract-row button{
+  background:#00c3ff;
+  border:none;
+  padding:6px 10px;
+  border-radius:6px;
+  cursor:pointer;
+  font-size:0.85rem;
+}
+
 #ruza-chat-toggle img{
   width:28px;
   height:28px;
@@ -462,6 +493,27 @@ footer a img{width:20px;height:20px;object-fit:contain}
     </a>
   </div>
 
+  <div class="contract-box">
+  <p style="color:#bfefff;font-size:0.9rem;margin-top:10px;">
+    Contract Address:
+  </p>
+
+  <div class="contract-row">
+    <span id="contract-address">
+      0x2Ec86E1B869cB251fE9441F02c01761543E6cbbD
+    </span>
+    <button onclick="copyContract()">Copy</button>
+  </div>
+</div>
+
+  <p style="font-size:0.8rem;color:#aaa;margin-top:6px;">
+  Always verify the contract address before swapping
+</p>
+
+  <p style="font-size:0.9rem;color:#ffcc00;margin-top:8px;">
+  You can use this contract on PancakeSwap
+</p>
+
   <section class="section-box chart">
     <h2>📊 Live Chart</h2>
     <iframe src="https://dexscreener.com/bsc/0x2ec86e1b869cb251fe9441f02c01761543e6cbbd?embed=1&theme=light" title="RUZA chart"></iframe>
@@ -499,6 +551,15 @@ footer a img{width:20px;height:20px;object-fit:contain}
 
 <script>
   const apiBase = "https://ruza-backend.onrender.com";
+
+  alert("Contract copied! You can paste it in PancakeSwap.");
+
+  function copyContract(){
+  const text = document.getElementById("contract-address").innerText;
+  navigator.clipboard.writeText(text);
+
+  alert("Contract copied!");
+}
 
 
   /* CORRECT API (PAIR) */
@@ -748,6 +809,7 @@ if (userInput) {
 
 </body>
 </html>
+
 
 
 
