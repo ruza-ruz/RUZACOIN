@@ -453,10 +453,20 @@ button{
       0x2Ec86E1B869cB251fE9441F02c01761543E6cbbD
     </div>
 
-    <button onclick="navigator.clipboard.writeText('0x2Ec86E1B869cB251fE9441F02c01761543E6cbbD');
-                     alert('Contract copied!');">
-      Copy Contract
-    </button>
+<button style="
+  background:rgba(0,255,255,0.15);
+  color:#00ffff;
+  padding:8px 14px;
+  font-size:0.85rem;
+  border-radius:8px;
+  border:1px solid rgba(0,255,255,0.4);
+  width:auto;
+  display:inline-block;
+"
+onclick="navigator.clipboard.writeText('0x2Ec86E1B869cB251fE9441F02c01761543E6cbbD');
+         alert('Contract copied!');">
+  Copy Contract
+</button>
 
     <p class="small" style="margin-top:8px;color:#aaa;">
       Always verify the contract address before swapping
@@ -737,6 +747,7 @@ messages.innerHTML += `<div class="ai-msg ${dirClass2}">${reply}</div>`;
 
 </body>
 </html>
+
 
 
 
