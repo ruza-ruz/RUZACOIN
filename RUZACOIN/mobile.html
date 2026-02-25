@@ -467,14 +467,35 @@ button{
 
 
   <div style="margin-top:12px;">
-    <p style="color:#bfefff;font-size:0.8rem;">
-      Contract Address:
-    </p>
+  <a href="https://pancakeswap.finance/swap?outputCurrency=0x2ec86e1b869cb251fe9441f02c01761543e6cbbd"
+     target="_blank" rel="noopener"
+     style="
+       display:inline-flex;
+       align-items:center;
+       gap:8px;
+       background:linear-gradient(135deg,#00ffff,#00b3b3);
+       color:#111;
+       padding:10px 16px;
+       border-radius:10px;
+       text-decoration:none;
+       font-weight:700;
+       font-size:0.95rem;
+       box-shadow:0 0 10px rgba(0,255,255,0.4);
+       transition:0.3s;
+     ">
+    <img src="assets/pancake.png" style="width:20px;height:20px;">
+    Trade RUZA on PancakeSwap
+  </a>
+</div>
 
-    <div style="background:#111;padding:8px;border-radius:8px;color:#00ffff;
-                font-size:0.8rem;word-break:break-all;margin-bottom:8px;">
-      0x2Ec86E1B869cB251fE9441F02c01761543E6cbbD
-    </div>
+<p style="color:#bfefff;font-size:0.8rem;">
+  Contract Address:
+</p>
+
+<div style="background:#111;padding:8px;border-radius:8px;color:#00ffff;
+            font-size:0.8rem;word-break:break-all;margin-bottom:8px;">
+  0x2Ec86E1B869cB251fE9441F02c01761543E6cbbD
+</div>
 
 <button style="
   background:rgba(0,255,255,0.15);
@@ -498,27 +519,7 @@ onclick="navigator.clipboard.writeText('0x2Ec86E1B869cB251fE9441F02c01761543E6cb
     <p class="small" style="color:#ffcc00;">
       You can use this contract on PancakeSwap
     </p>
-    <div style="margin-top:12px;">
-  <a href="https://pancakeswap.finance/swap?outputCurrency=0x2ec86e1b869cb251fe9441f02c01761543e6cbbd"
-     target="_blank" rel="noopener"
-     style="
-       display:inline-flex;
-       align-items:center;
-       gap:8px;
-       background:linear-gradient(135deg,#00ffff,#00b3b3);
-       color:#111;
-       padding:10px 16px;
-       border-radius:10px;
-       text-decoration:none;
-       font-weight:700;
-       font-size:0.95rem;
-       box-shadow:0 0 10px rgba(0,255,255,0.4);
-       transition:0.3s;
-     ">
-    <img src="assets/pancake.png" style="width:20px;height:20px;">
-    Trade RUZA on PancakeSwap
-  </a>
-</div>
+    
   </div>
 
 </section>
@@ -791,6 +792,7 @@ messages.innerHTML += `<div class="ai-msg ${dirClass2}">${reply}</div>`;
 
 </body>
 </html>
+
 
 
 
