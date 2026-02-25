@@ -228,9 +228,8 @@
   max-height:120px;
   overflow-y:auto;
   line-height:1.4;
-  direction: rtl;
-  unicode-bidi: embed;
-  text-align: right;
+  direction: ltr;        /* پیش‌فرض انگلیسی */
+  text-align: left;
 }
 
 #ruza-chat-input button{
@@ -618,6 +617,17 @@ footer a img{width:20px;height:20px;object-fit:contain}
    alert("Contract copied! You can paste it in PancakeSwap.");
 }
 
+  userInput.addEventListener("input", function () {
+  const value = this.value;
+
+  if (/[\u0600-\u06FF]/.test(value)) {
+    this.style.direction = "rtl";
+    this.style.textAlign = "right";
+  } else {
+    this.style.direction = "ltr";
+    this.style.textAlign = "left";
+  }
+});
 
   /* CORRECT API (PAIR) */
 
@@ -866,6 +876,7 @@ if (userInput) {
 
 </body>
 </html>
+
 
 
 
