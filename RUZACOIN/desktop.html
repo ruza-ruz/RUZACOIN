@@ -193,8 +193,6 @@
   padding:8px;
   border-radius:8px;
   margin-bottom:8px;
-  direction: ltr;
-  text-align: left;
 }
     
 
@@ -838,8 +836,15 @@ if (userInput) {
     const data = await res.json();
 
     // نمایش جواب AI
-    messagesBox.innerHTML +=
-      `<div class="ai-msg">${formatMessage(data.reply)}</div>`;
+    // تشخیص فارسی بودن جواب AI
+const isPersian = /[\u0600-\u06FF]/.test(data.reply);
+
+messagesBox.innerHTML += `
+  <div class="ai-msg"
+       style="direction:${isPersian ? 'rtl' : 'ltr'};
+              text-align:${isPersian ? 'right' : 'left'};">
+    ${formatMessage(data.reply)}
+  </div>`;
 
     messagesBox.scrollTop = messagesBox.scrollHeight;
 
@@ -879,6 +884,7 @@ if (userInput) {
 
 </body>
 </html>
+
 
 
 
