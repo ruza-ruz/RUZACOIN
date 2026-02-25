@@ -617,17 +617,7 @@ footer a img{width:20px;height:20px;object-fit:contain}
    alert("Contract copied! You can paste it in PancakeSwap.");
 }
 
-  userInput.addEventListener("input", function () {
-  const value = this.value;
-
-  if (/[\u0600-\u06FF]/.test(value)) {
-    this.style.direction = "rtl";
-    this.style.textAlign = "right";
-  } else {
-    this.style.direction = "ltr";
-    this.style.textAlign = "left";
-  }
-});
+  
 
   /* CORRECT API (PAIR) */
 
@@ -744,6 +734,19 @@ document.addEventListener("DOMContentLoaded", () => {
   const chatBox = document.getElementById("ruza-chat");
   const sendBtn = document.getElementById("ruza-send");
   const userInput = document.getElementById("ruza-user-input");
+  
+  // Auto direction detection
+userInput.addEventListener("input", function () {
+  const value = this.value;
+
+  if (/[\u0600-\u06FF]/.test(value)) {
+    this.style.direction = "rtl";
+    this.style.textAlign = "right";
+  } else {
+    this.style.direction = "ltr";
+    this.style.textAlign = "left";
+  }
+});
   // Auto resize textarea
 if (userInput) {
   userInput.addEventListener("input", function () {
@@ -876,6 +879,7 @@ if (userInput) {
 
 </body>
 </html>
+
 
 
 
