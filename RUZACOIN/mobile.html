@@ -388,11 +388,21 @@ button{
 
     </header>
 
-    <h2 style="color:var(--accent);font-size:1.2rem;margin:6px 0">
-      1,000,000 RUZA Tokens Will Be Distributed for Free!
-    </h2>
+    <section class="section-box" style="
+  border:1px solid rgba(0,255,255,0.25);
+  background:rgba(0,255,255,0.08);
+  box-shadow:0 0 15px rgba(0,255,255,0.15);
+">
 
-    <p class="small" id="claim-stats">Loading...</p>
+  <h2 style="color:#00ffff;font-size:1.1rem;margin:0 0 6px 0">
+    🎉 1,000,000 RUZA Tokens Distribution
+  </h2>
+
+  <p class="small" id="claim-stats" style="margin:0;color:#fff;">
+    Loading...
+  </p>
+
+</section>
 
     <section class="section-box">
       <h3 style="margin:0 0 8px 0">🎁 Claim 100 RUZ — One Time per Wallet</h3>
@@ -449,13 +459,6 @@ button{
 
     </section>
 
-    <div class="pancake" style="margin:10px 0;">
-      <a href="https://pancakeswap.finance/swap?outputCurrency=0x2ec86e1b869cb251fe9441f02c01761543e6cbbd"
-         target="_blank" rel="noopener">
-        <img src="assets/pancake.png" alt="Pancake" />
-        Trade RUZA (RUZ) on PancakeSwap
-      </a>
-    </div>
 
     <section class="section-box" style="
   border:1px solid rgba(0,255,255,0.25);
@@ -495,6 +498,27 @@ onclick="navigator.clipboard.writeText('0x2Ec86E1B869cB251fE9441F02c01761543E6cb
     <p class="small" style="color:#ffcc00;">
       You can use this contract on PancakeSwap
     </p>
+    <div style="margin-top:12px;">
+  <a href="https://pancakeswap.finance/swap?outputCurrency=0x2ec86e1b869cb251fe9441f02c01761543e6cbbd"
+     target="_blank" rel="noopener"
+     style="
+       display:inline-flex;
+       align-items:center;
+       gap:8px;
+       background:linear-gradient(135deg,#00ffff,#00b3b3);
+       color:#111;
+       padding:10px 16px;
+       border-radius:10px;
+       text-decoration:none;
+       font-weight:700;
+       font-size:0.95rem;
+       box-shadow:0 0 10px rgba(0,255,255,0.4);
+       transition:0.3s;
+     ">
+    <img src="assets/pancake.png" style="width:20px;height:20px;">
+    Trade RUZA on PancakeSwap
+  </a>
+</div>
   </div>
 
 </section>
@@ -767,6 +791,7 @@ messages.innerHTML += `<div class="ai-msg ${dirClass2}">${reply}</div>`;
 
 </body>
 </html>
+
 
 
 
