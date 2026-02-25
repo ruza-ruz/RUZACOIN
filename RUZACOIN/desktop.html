@@ -150,9 +150,7 @@
   text-align:right;
 }
 
-#ruza-chat-messages{
-  direction: rtl;
-}
+
 
 /* پیام کاربر */
 .user-msg{
@@ -173,9 +171,30 @@
   border-radius:8px;
   margin-bottom:8px;
 
+}
+    /* container */
+#ruza-chat-messages{
+  direction: ltr;
+}
+
+/* پیام کاربر */
+.user-msg{
+  background:#009dff;
+  padding:8px;
+  border-radius:8px;
+  margin-bottom:8px;
   direction: rtl;
   text-align: right;
-  unicode-bidi: embed;
+}
+
+/* پیام AI */
+.ai-msg{
+  background:rgba(255,255,255,0.08);
+  padding:8px;
+  border-radius:8px;
+  margin-bottom:8px;
+  direction: ltr;
+  text-align: left;
 }
     
 
@@ -847,6 +866,7 @@ if (userInput) {
 
 </body>
 </html>
+
 
 
 
