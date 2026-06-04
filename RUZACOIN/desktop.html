@@ -158,10 +158,6 @@
   padding:8px;
   border-radius:8px;
   margin-bottom:8px;
-
-  direction: rtl;
-  text-align: right;
-  unicode-bidi: embed;
 }
 
 /* پیام AI */
@@ -178,7 +174,7 @@
 }
 
 /* پیام کاربر */
-..user-msg{
+.user-msg{
   background:#009dff;
   padding:8px;
   border-radius:8px;
@@ -816,8 +812,14 @@ if (userInput) {
   if(!text) return;
 
   // نمایش پیام کاربر
-  messagesBox.innerHTML +=
-const isPersianUser = /[\u0600-\u06FF]/.test(text);
+  const isPersianUser = /[\u0600-\u06FF]/.test(text);
+
+messagesBox.innerHTML += `
+  <div class="user-msg"
+       style="direction:${isPersianUser ? 'rtl' : 'ltr'};
+              text-align:${isPersianUser ? 'right' : 'left'};">
+    ${formatMessage(text)}
+  </div>`;
 
 messagesBox.innerHTML += `
   <div class="user-msg"
