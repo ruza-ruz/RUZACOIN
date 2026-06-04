@@ -821,12 +821,6 @@ messagesBox.innerHTML += `
     ${formatMessage(text)}
   </div>`;
 
-messagesBox.innerHTML += `
-  <div class="user-msg"
-       style="direction:${isPersianUser ? 'rtl' : 'ltr'};
-              text-align:${isPersianUser ? 'right' : 'left'};">
-    ${formatMessage(text)}
-  </div>`;
 
   userInput.value = "";
   messagesBox.scrollTop = messagesBox.scrollHeight;
