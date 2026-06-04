@@ -178,13 +178,12 @@
 }
 
 /* پیام کاربر */
-.user-msg{
+..user-msg{
   background:#009dff;
   padding:8px;
   border-radius:8px;
   margin-bottom:8px;
-  direction: rtl;
-  text-align: right;
+  unicode-bidi: plaintext;
 }
 
 /* پیام AI */
@@ -818,7 +817,14 @@ if (userInput) {
 
   // نمایش پیام کاربر
   messagesBox.innerHTML +=
-    `<div class="user-msg">${formatMessage(text)}</div>`;
+const isPersianUser = /[\u0600-\u06FF]/.test(text);
+
+messagesBox.innerHTML += `
+  <div class="user-msg"
+       style="direction:${isPersianUser ? 'rtl' : 'ltr'};
+              text-align:${isPersianUser ? 'right' : 'left'};">
+    ${formatMessage(text)}
+  </div>`;
 
   userInput.value = "";
   messagesBox.scrollTop = messagesBox.scrollHeight;
